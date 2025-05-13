@@ -1,0 +1,5 @@
+button{
+    font-size: var(--tam-text);
+    padding: 0.5em;
+    border-radius: 15px;
+}

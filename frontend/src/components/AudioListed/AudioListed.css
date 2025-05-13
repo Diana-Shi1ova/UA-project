@@ -1,0 +1,13 @@
+.audio-list-element{
+    /*width: 100%;*/
+    display: flex;
+    flex-direction: row;
+    background-color: #303030;
+    gap: 3em;
+    align-items: center;
+    padding: .5em 3em .5em 3em;
+}
+
+/*audio{
+    width: 100%;
+}*/

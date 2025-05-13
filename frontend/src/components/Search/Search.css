@@ -1,0 +1,37 @@
+input[type="search"]{
+    font-size: var(--tam-text);
+    padding: .5em;
+    border-radius: 30px;
+
+    padding-right: 3.5em;
+
+    width: 100%;
+}
+
+
+.searchbar{
+    position: relative;
+    display: inline-block;
+}
+
+.searchbar {
+    position: relative;
+    display: inline-block;
+}
+
+.search-input {
+    padding-right: 40px;
+}
+
+.search-button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    border: none;
+    background: #ccc;
+    cursor: pointer;
+    padding: 0 15px;
+    background-color: transparent;
+
+}

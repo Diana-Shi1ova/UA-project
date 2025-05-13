@@ -1,0 +1,17 @@
+.asset-card{
+    background-color: rgb(45, 45, 45);
+    padding: 1em;
+    width: 200px;
+
+    .card-footer{
+        display: flex;
+        width: 100%;
+        text-align: left;
+        gap: 1em;
+    }
+
+    .asset-image{
+        height: auto;
+        width: 100%;
+    }
+}

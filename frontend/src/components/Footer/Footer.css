@@ -1,0 +1,28 @@
+.general-footer{
+    width: 100%;
+    /*display: grid;
+    grid-template-columns: 40% 30% 30%;*/
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    justify-content: space-evenly;
+
+    ul{
+        padding: 0;
+    }
+
+    li{
+        list-style: none;
+        margin-bottom: 0.5em;
+    }
+}
+
+@media all and (width<800px) {
+    footer{
+        display: block;
+        ul{
+            margin-bottom: 2em;
+        }
+    }
+}

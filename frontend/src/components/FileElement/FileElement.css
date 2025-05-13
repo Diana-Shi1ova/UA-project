@@ -1,0 +1,27 @@
+.active{
+    background-color: var(--fondo-2-hover) !important;
+}
+
+.file-element{
+    all: unset;
+    cursor: pointer;
+    padding: .3em;
+    display: flex;
+    align-items: center;
+    /*justify-content: center;*/
+    width: 100%;
+    border-radius: 0;
+
+    background-color: var(--fondo-2);
+    color: var(--text);
+
+    input{
+        width: 20px;
+        height: 20px;
+        margin-right: 2em;
+    }
+}
+
+.file-element:hover{
+    background-color: var(--fondo-2-hover);
+}

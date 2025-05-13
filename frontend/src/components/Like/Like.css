@@ -1,0 +1,19 @@
+
+
+.like-div{
+    display: flex;
+    flex-direction: row;
+
+    .like{
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        font-size: 18pt;
+        color: gray;
+        transition: color 0.3s ease;
+    }
+
+    .liked{
+        color: red;
+    }
+}
