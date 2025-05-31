@@ -1,0 +1,148 @@
+.perfil-header{
+    display: grid;
+    width: 100%;
+    box-sizing: border-box;
+    grid-template-columns: auto auto 2fr;
+    grid-template-rows: auto 1fr;
+    /*grid-template-areas:
+        "foto nombre filtro"
+        "foto botones filtro";*/
+    /* gap: 3em; */
+    padding: 0 4em 0 4em;
+    margin-top: 2em;
+    /* gap: 2em; */
+
+    /* justify-content: center; */
+    align-items: center;
+    /* text-align: center; */
+
+    .foto-mis-datos {
+        grid-column: 1;
+        grid-row: 1 / span 2;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: auto;
+        gap: 1em;
+
+        margin-right: 3em;
+
+        img{
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+        }
+        button{
+            width: 200px;
+        }
+    }
+
+    h2{
+        margin-top: 2em;
+        margin-bottom: 1.5em;
+        grid-column: 2;
+        /* align-self: end; */
+        justify-self: center;
+    }
+
+    .botones-perfil{
+        grid-column: 2;
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        /* width: 10em; */
+        justify-self: center;
+        align-self: start;
+        
+        .botones-perfil-h{
+            display: flex;
+            flex-direction: row;
+            gap: .5em;
+
+            button{
+                width: 8em;
+            }
+        }
+    }
+
+    .filtros-assets{
+        grid-column: 3;
+        grid-row: 1 / span 2;
+        justify-self: right;
+        margin-left: 5em;
+    }
+}
+
+/* Привязка элементов к областям */
+/*.foto-mis-datos {
+  grid-area: foto;
+}
+
+.perfil-grid h2 {
+  grid-area: nombre;
+  margin: 0;
+}
+
+.botones-perfil {
+  grid-area: botones;
+}*/
+
+/*.perfil-grid > Filtrarassets,
+.perfil-grid > .filtrarassets,
+.perfil-grid > *:last-child {
+  grid-area: filtro;
+}*/
+
+@media all and (width<1175px) {
+    .perfil-header{
+        grid-template-columns: auto auto;
+        grid-template-rows: auto 1fr auto;
+
+        .foto-mis-datos {
+            grid-column: 1;
+            grid-row: 1 / span 2;
+            justify-self: right;
+        }
+
+        h2{
+            grid-column: 2;
+            justify-self: left;
+        }
+
+        .botones-perfil{
+            grid-column: 2;
+            justify-self: left;
+        }
+
+        .filtros-assets{
+            grid-column: 1 / span 2;
+            grid-row: 3;
+            justify-self: center;
+            margin: 0;
+            margin-top: 3em;
+        }
+    }
+}
+
+@media all and (width<745px) {
+    .perfil-header{
+        display: flex;
+        flex-direction: column;
+        /*justify-items: center !important;
+        align-items: center !important;*/
+    }
+    h2, .botones-perfil{
+        /* justify-self: center !important; */
+        align-self: center !important;
+    }
+    h2{
+        margin: 1em 0 1em 0 !important;
+    }
+    .botones-perfil{
+        margin-top: 3em;
+    }
+    .foto-mis-datos{
+        margin-right: 0 !important;
+    }
+}

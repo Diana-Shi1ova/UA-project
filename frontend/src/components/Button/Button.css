@@ -1,5 +1,82 @@
-button{
-    font-size: var(--tam-text);
-    padding: 0.5em;
+.but-svg{
+    font-size: var(--tam-texto);
+    padding: 0.7em;
     border-radius: 15px;
+    cursor: pointer;
+    
+    svg{
+        margin-right: .5em;
+    }
+}
+
+.but-svg:hover{
+    text-decoration: underline;
+}
+.but-svg:active{
+    text-decoration: underline;
+}
+
+button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* Variante Primary */
+.primary{
+    color: var(--texto-2);
+    background-color: var(--primary);
+    border: none;
+}
+.primary:hover{
+    background-color: var(--primary-hover);
+}
+.primary:active{
+    background-color: var(--primary-active);
+}
+
+
+/* Variante Secondary */
+.secondary{
+    color: var(--primary);
+    background-color: var(--secondary);
+    border: 2px solid var(--primary);
+}
+.secondary:hover{
+    /* color: var(--primary-hover); */
+    background-color: var(--secondary-hover);
+    /* border-color: var(--primary-hover); */
+}
+.secondary:active{
+    background-color: var(--secondary-active);
+}
+
+
+/* Variante Warning */
+.warning{
+    color: var(--texto-2);
+    background-color: var(--warning);
+    border: none;
+}
+.warning:hover{
+    background-color: var(--warning-hover);
+}
+.warning:active{
+    background-color: var(--warning-active);
+}
+
+
+/* Variante Danger */
+.danger{
+    color: var(--texto-2);
+    background-color: var(--danger);
+    border: none;
+}
+.danger:hover{
+    background-color: var(--danger-hover);
+}
+.danger:active{
+    /* color: var(--texto-danger-active); */
+    background-color: var(--danger-active);
 }

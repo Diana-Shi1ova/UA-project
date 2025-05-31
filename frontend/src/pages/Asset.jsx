@@ -46,7 +46,7 @@ function Asset(){
                     </section>
                     
 
-                    {/* <Input inputTipo="text" inputId="nombre"></Input>
+                    {/* <Input inputTipo="text" inputName="nombre"></Input>
                     <textarea name="" id=""></textarea> */}
                 </section>
             </main>

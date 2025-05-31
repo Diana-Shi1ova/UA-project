@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
+import logo from "../../assets/gamepad-logo.png";
 import "./Footer.css"
 
 function Footer(){
     return(
         <footer className="general-footer">
-            <h2>MOLAMAZOGAMES</h2>
+            <Link to="/"><img className="logo-img-footer" src={logo} alt="Molamazogames" /></Link>
             <section className="section-footer">
                 <h3>Categorías</h3>
                 <ul>

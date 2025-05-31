@@ -16,6 +16,12 @@
         list-style: none;
         margin-bottom: 0.5em;
     }
+
+    .logo-img-footer{
+        filter: invert();
+        width: 120px;
+        height: auto;
+    }
 }
 
 @media all and (width<800px) {
@@ -24,5 +30,11 @@
         ul{
             margin-bottom: 2em;
         }
+    }
+}
+
+@media all and (width<520px) {
+    .general-footer{
+        flex-direction: column;
     }
 }

@@ -1,0 +1,32 @@
+.filtros-assets{
+  background-color: var(--fondo-2);
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .form-vertical{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-horizontal{
+    display: flex;
+    flex-direction: row;
+    gap: 4em;
+  }
+
+  input[type="date"]{
+    background-color: var(--fondo-2);
+    padding: .5em;
+    border: 2px var(--texto) solid;
+    color: var(--texto);
+    margin-left: 1em;
+  }
+
+  input[type="date"]:focus-visible{
+    border: var(--texto) solid 2px;
+    outline: none;
+  }
+}

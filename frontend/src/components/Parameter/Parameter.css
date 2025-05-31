@@ -1,0 +1,23 @@
+.parameter{
+    display: flex;
+    flex-direction: row;
+    /* border: 2px solid var(--primary); */
+    /* color: var(--primary); */
+    background-color: var(--primary);
+    color: var(--texto-2);
+    padding: .5em;
+    cursor: default;
+    border-radius: 10px;
+    width: fit-content;
+
+    .parameter-button{
+        /* color: var(--primary); */
+        color: var(--texto-2);
+        background: none;
+	    border: none;
+        cursor: pointer;
+        font-size: var(--tam-texto);
+        padding: 0;
+        margin-left: .5em;
+    }
+}

@@ -1,0 +1,20 @@
+.elimiar-cuenta-form{
+    max-width: 35em;
+    .p-warning{
+        text-align: center;
+    }
+    .input-form{
+        justify-self: center;
+        input{
+            width: 20em;
+        }
+    }
+}
+
+@media all and (width<445px){
+    .input-form{
+        input{
+            width: 15em !important;
+        }
+    }
+}

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import "./Like.css";
 
-function Like(){
+function Like({likesNum=0}){
     const [liked, setLiked] = useState(false);
 
     const toggleLike = () => {
@@ -22,7 +22,7 @@ function Like(){
                     color: liked ? 'red' : 'gray',
                     transition: 'color 0.3s ease',
                 }}*/
-                aria-label={liked ? 'Unlike' : 'Like'}
+                aria-label={liked ? 'Unlike'+likesNum : 'Like'+likesNum}
                 >
                 {liked ? <FaHeart /> : <FaRegHeart />}
             </button>

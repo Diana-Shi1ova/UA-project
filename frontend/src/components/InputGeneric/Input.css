@@ -1,0 +1,19 @@
+.input-form{
+    display: flex;
+    flex-direction: column;
+
+    input{
+        font-size: 14pt;
+        padding: .5em;
+        border-radius: 10px;
+        border: 2px solid var(--texto);
+        background-color: var(--fondo-2);
+        color: var(--texto);
+        margin-top: .2em;
+    }
+
+    input:focus-visible{
+        outline: 0;
+        background-color: var(--fondo-2-hover);
+    }
+}

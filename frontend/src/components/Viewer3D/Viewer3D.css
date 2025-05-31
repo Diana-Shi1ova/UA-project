@@ -1,0 +1,8 @@
+.viewer-3d{
+    border: 2px solid var(--texto);
+    border-radius: 7px;
+}
+
+.viewer-3d:focus-visible{
+    border: 2px solid var(--primary);
+}

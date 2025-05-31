@@ -1,6 +1,7 @@
 //import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
+import { useEffect } from 'react';
 import './App.css'
 
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
@@ -12,9 +13,18 @@ import Asset from './pages/Asset';
 import Perfil from './pages/Perfil';
 import MisDatos from './pages/MisDatos';
 import CambioContrasenya from './pages/CambioContrasenya';
+import EliminarCuenta from './pages/EliminarCuenta';
+import SubirAsset from './pages/SubirAsset';
 
 function App() {
   //const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    document.querySelectorAll('svg').forEach(svg => {
+      svg.setAttribute('aria-hidden', 'true');
+      svg.setAttribute('focusable', 'false');
+    });
+  }, []);
 
   return (
     <>
@@ -27,7 +37,9 @@ function App() {
             <Route path='/asset' element={<Asset/>}/>
             <Route path='/perfil' element={<Perfil/>}/>
             <Route path='/mis-datos' element={<MisDatos/>}/>
-            <Route path='/cambio-contrasenya' element={<CambioContrasenya/>}/>
+            <Route path='/mis-datos/cambio-contrasenya' element={<CambioContrasenya/>}/>
+            <Route path='/mis-datos/eliminar-cuenta' element={<EliminarCuenta/>}/>
+            <Route path='/subir-asset' element={<SubirAsset/>}/>
           </Routes>
       </Router>
     </>

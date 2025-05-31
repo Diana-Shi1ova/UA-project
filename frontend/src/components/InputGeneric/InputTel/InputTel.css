@@ -1,0 +1,62 @@
+/*#iti-1__dropdown-content{
+    background-color: var(--fondo-2);
+}
+
+#phone{
+    width: 100% !important;
+}
+
+.input-form .iti--inline-dropdown{
+    width: 100%;
+}*/
+
+.form-control {
+    width: 100% !important;
+    
+}
+
+.flag-dropdown, .form-control{
+    font-size: 14pt !important;
+    background-color: var(--fondo-2) !important;
+    color: var(--texto) !important;
+    border: 2px var(--texto) solid !important;
+    border-radius: 10px !important;
+    padding-top: .5em !important;
+    padding-bottom: .5em !important;
+    height: auto !important;
+    line-height: 0 !important;
+}
+
+.country-list{
+    background-color: var(--fondo-2) !important;
+    width: 20em !important;
+}
+
+.search-emoji{
+    display: none;
+}
+
+.search{
+    padding: 0 !important;
+    width: 100% !important;
+    padding: .5em !important;
+}
+
+.search-box{
+    width: 100% !important;
+    margin: 0 !important;
+}
+
+/*.react-tel-input .form-control {
+  height: 40px;
+  padding-left: 48px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.react-tel-input .flag-dropdown {
+  background-color: white;
+  border-right: 1px solid #ccc;
+  border-radius: 8px 0 0 8px;
+}*/

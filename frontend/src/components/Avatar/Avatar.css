@@ -1,0 +1,43 @@
+.avatar{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border: 4px var(--primary) solid;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+.avatar:hover{
+    border-color: var(--primary-hover);
+    cursor: pointer;
+}
+
+.avatar:active{
+    border-color: var(--primary-active);
+}
+
+.opciones{
+    display: none;
+}
+
+.opciones-show{
+    background-color: var(--fondo-2);
+    padding: 1em;
+    position: absolute;
+    top: 5em;
+    right: 2.5em;
+
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+}

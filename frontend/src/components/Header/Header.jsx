@@ -5,20 +5,36 @@ import Button from "../Button/Button";
 import Navbar from "../Navbar/Navbar";
 import Search from "../Search/Search";
 import "./Header.css";
+import logo from "../../assets/gamepad-logo.png";
+
+import { FaUserPlus } from "react-icons/fa";
+import { FaUser } from "react-icons/fa";
+
+import { useSelector } from 'react-redux';
 
 
-function Header({ login=false}){
+
+function Header(){
     const navigate = useNavigate();
+    const { user } = useSelector((state) => state.auth);
 
     return(
         <header className="web-header">
             <div className="header-row">
-                <Link to="/"><h1>MOLAMAZOGAMES</h1></Link>
+                <Link to="/" className="logo"><h1>MOLAMAZOGAMES</h1><img className="logo-img" src={logo} alt="Molamazogames" /></Link>
                 <Search></Search>
-                <div className="botonera">
-                    <Button buttonName="Iniciar sesión" buttonFunction={() => navigate('/login')}></Button>
-                    <Button buttonName="Registrarse" buttonFunction={() => navigate("/registro")}></Button>
-                </div>
+                
+                    {user ? (
+                        <div className="botonera">
+                            <Button buttonName="Añadir asset" buttonFunction={() => navigate('/subir-asset')} icon="FaPlus"></Button>
+                            <Avatar></Avatar>
+                        </div>
+                    ) : (
+                        <div className="botonera">
+                            <Button buttonName="Iniciar sesión" buttonFunction={() => navigate('/login')} icon="FaUser"></Button>
+                            <Button buttonName="Registrarse" buttonFunction={() => navigate("/registro")} icon="FaUserPlus"></Button>
+                        </div>
+                    )}
                 {/* <Avatar></Avatar> */}
             </div>
             <Navbar></Navbar>
