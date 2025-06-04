@@ -15,7 +15,7 @@
 
     textarea{
         height: 12em;
-        width:40em;
+        /* width:40em; */
     }
 
     input:focus-visible, textarea:focus-visible, select:focus-visible{
@@ -26,5 +26,9 @@
 
     /*select:focus-visible{
         outline: 0;
+    }*/
+
+    /*.error{
+        border-color: var(--danger);
     }*/
 }

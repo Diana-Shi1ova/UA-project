@@ -1,0 +1,28 @@
+.comment{
+    border: 1px solid var(--texto);
+    border-radius: 7px;
+    padding: 1em;
+
+    p{
+        margin: 0;
+    }
+    .user{
+        font-weight: bold;
+        font-size: 16pt;
+        margin-bottom: 0;
+    }
+
+    .formattedDate{
+        color: var(--primary);
+        margin-top: .3em;
+        /* font-style: italic; */
+    }
+
+    .content, .formattedDate{
+        margin-left: .5em;
+    }
+
+    .content{
+        margin-top: 1em;
+    }
+}

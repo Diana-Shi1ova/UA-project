@@ -26,6 +26,18 @@ const getCommentByID = async (req, res) => {
     }
 }
 
+// obtener un comment por ID del asset
+const getCommentByAsset = async (req, res) => {
+        try {
+        const assetId = req.params.assetId;
+        const comments = await Comment.find({ asset: assetId });
+        res.status(200).json(comments);
+    } catch (error) {
+        res.status(500).json({ message: 'Server error', error: error.message });
+    }
+}
+
+
 // Crear un comment
 const createComment = async (req, res) => {
     try{   
@@ -84,4 +96,5 @@ module.exports = {
     updateComment,
     createComment,
     deleteComment,
+    getCommentByAsset,
 }

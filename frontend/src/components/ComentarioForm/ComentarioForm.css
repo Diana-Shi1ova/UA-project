@@ -1,0 +1,8 @@
+.comentario-form{
+    textarea{
+        height: 6em;
+    }
+    button{
+        justify-self: center;
+    }
+}

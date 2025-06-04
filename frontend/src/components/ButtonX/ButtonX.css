@@ -1,0 +1,9 @@
+.button-x{
+    cursor: pointer;
+    /* justify-self: right; */
+    color: var(--texto);
+    font-size: var(--tam-texto);
+    background: none;
+    border: none;
+    /* padding: .3em; */
+}

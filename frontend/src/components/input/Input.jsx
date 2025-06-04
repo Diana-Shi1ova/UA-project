@@ -1,4 +1,4 @@
-import "./Input.css"
+import "./Input.css";
 
 function Input({ labelText, inputName = "", inputTipo, inputChange=()=>{}, inputValue, options = []}){
     return(

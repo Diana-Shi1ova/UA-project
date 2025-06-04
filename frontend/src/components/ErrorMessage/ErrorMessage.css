@@ -1,0 +1,15 @@
+.error-message{
+    background-color: var(--error);
+    color: var(--texto);
+    padding: .3em;
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    /* border-radius: 7px; */
+    border: 2px solid #ff1717;
+    padding-left: 1em;
+}
+
+.hidden{
+    display: none;
+}

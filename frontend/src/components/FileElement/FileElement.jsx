@@ -1,6 +1,6 @@
 import "./FileElement.css";
 
-function FileElement({fileName}){
+function FileElement({fileName, fileChecked=false, fileOnCheck=()=>{}}){
     var cont = 0;
     const changeColor = (but) =>{
         if(cont==0){
@@ -14,7 +14,7 @@ function FileElement({fileName}){
     }
 
     return(
-        <button className="file-element" onClick={(event) => changeColor(event.target)}><input type="checkbox" />{fileName}</button>
+        <button className="file-element" onClick={(event) => changeColor(event.target)}><input type="checkbox" name={fileName} checked={fileChecked} onChange={fileOnCheck}/>{fileName}</button>
     );
 }
 

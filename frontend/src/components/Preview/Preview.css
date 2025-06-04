@@ -1,0 +1,67 @@
+.section-preview{
+    width: 100%;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 7fr 3fr;
+    flex-direction: row;
+    justify-content: center;
+    gap: 2em;
+
+    .preview{
+        justify-self: center;
+        border: 1px solid var(--primary);
+        border-radius: 10px;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        width: 700px;
+        background-color: var(--fondo-1);
+
+        .like-div{
+            font-size: 20pt;
+            svg{
+                font-size: 24pt;
+            }
+            
+        }
+
+        .carousel{
+            position: relative;
+            padding: 0 1.5em 0 1.5em;
+            
+            img{
+                width: 100%;
+                height: auto;
+            }
+        }
+
+        .but-carousel{
+            position: absolute;
+            top: 50%;
+
+            svg{
+                margin: 0;
+                font-size: 24pt;
+            }
+        }
+
+        .but-c-1{
+            left: 5px;
+        }
+
+        .but-c-2{
+            right: 5px;
+        }
+    }
+    .files{
+        ul{
+            list-style: none;
+            padding-left: 1em;
+        }
+
+        button{
+            justify-self: center;
+        }
+    }
+}

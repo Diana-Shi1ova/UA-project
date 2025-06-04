@@ -11,6 +11,58 @@ const getFormats = async (req, res) => {
     }
 }
 
+// Obtener formatos agrupados por categoría
+/*const getFormatsByCategory = async (req, res) => {
+    try {
+        const result = await Format.aggregate([
+            { $group: { _id: "$category", formats: { $push: "$extention" } } },
+            { $project: { _id: 0, category: "$_id", formats: 1 } }
+        ]);
+        res.json(result);
+    } catch (error) {
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}*/
+
+// Obtener formatos agrupados por categoría
+const getFormatsByCategory = async (req, res) => {
+    try {
+        const result = await Format.aggregate([
+        {
+            $lookup: {
+            from: "categories",
+            localField: "category",
+            foreignField: "_id",
+            as: "categoryInfo"
+            }
+        },
+        {
+            $unwind: "$categoryInfo"
+        },
+        {
+            $group: {
+            _id: "$category",
+            categoryName: { $first: "$categoryInfo.name" },
+            formats: { $addToSet: "$extention" }
+            }
+        },
+        {
+            $project: {
+            _id: 0,
+            categoryId: "$_id",
+            categoryName: 1,
+            formats: 1
+            }
+        }
+        ]);
+
+        res.json(result);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+};
+
 // Obtener un format por ID
 const getFormatByID = async (req, res) => {
     try{
@@ -79,6 +131,7 @@ const deleteFormat = async (req, res) => {
 
 module.exports = {
     getFormats,
+    getFormatsByCategory,
     getFormatByID,
     updateFormat,
     createFormat,

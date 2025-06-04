@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 import { FaTag } from "react-icons/fa";
 import "./Tag.css";
 
-function Tag(){
+function Tag({tagName}){
     return(
         <div className="tag">
-            <Link to="/buscar?tag=Tag1"><FaTag /> Tag 1</Link>
+            <Link to="/buscar?tag=Tag1"><FaTag /> {tagName}</Link>
         </div>
     );
 }

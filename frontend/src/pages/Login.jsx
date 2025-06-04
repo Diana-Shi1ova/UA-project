@@ -8,6 +8,7 @@ import Button from "../components/Button/Button";
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { login, reset } from '../features/auth/authSlice'
+import { fetchLikedAssets, resetLikesState } from '../features/likes/likesSlice'
 //////////
 import { FaExclamationCircle } from "react-icons/fa";
 
@@ -26,6 +27,10 @@ function Login(){
         (state) => state.auth
     )
 
+    const { likes } = useSelector(
+        (state) => state.likes
+    )
+
     useEffect(() => {
         if (isError) {
             //toast.error(message)
@@ -33,6 +38,7 @@ function Login(){
         }
 
         if (isSuccess || user) {
+            dispatch(fetchLikedAssets(user._id));
             navigate('/');
             dispatch(reset());
         }

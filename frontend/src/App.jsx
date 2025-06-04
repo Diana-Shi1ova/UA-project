@@ -34,7 +34,7 @@ function App() {
             <Route path='/login' element={<Login/>}/>
             <Route path='/registro' element={<Registro/>}/>
             <Route path='/buscar' element={<Busqueda/>}/>
-            <Route path='/asset' element={<Asset/>}/>
+            <Route path='/asset/:id' element={<Asset/>}/>
             <Route path='/perfil' element={<Perfil/>}/>
             <Route path='/mis-datos' element={<MisDatos/>}/>
             <Route path='/mis-datos/cambio-contrasenya' element={<CambioContrasenya/>}/>

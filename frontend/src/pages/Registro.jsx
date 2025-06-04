@@ -9,6 +9,7 @@ import Button from "../components/Button/Button";
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { register, reset } from '../features/auth/authSlice'
+import { fetchLikedAssets, resetLikesState } from '../features/likes/likesSlice'
 //////////
 
 function Registro(){
@@ -46,8 +47,13 @@ function Registro(){
         (state) => state.auth
     );
 
+    const { likes } = useSelector(
+        (state) => state.likes
+    )
+
     useEffect(() => {
         if (isSuccess) {
+            dispatch(fetchLikedAssets(user._id));
             navigate("/");
             dispatch(reset());
         }

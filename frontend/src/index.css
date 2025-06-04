@@ -75,8 +75,10 @@ button:focus-visible {
   --fondo-2: #2D303E;
   --fondo-2-hover: #3f4355;
   --fondo-2-active: #555a73;
-  --texto: #E7E7E7;
+  /* --texto: #E7E7E7; */
+  --texto: #ffffff;
   --texto-2: #000000;
+  --error-message: #A30000;
   --primary: #88BBFE;
   --primary-hover: #5499F5;
   --primary-active: #3e84e1;
@@ -90,7 +92,8 @@ button:focus-visible {
   --warning-hover: #dfd34d;
   /* --warning-hover: #FFE917; */
   --warning-active: #ccae35;
-  --danger: #FF8180;
+  /* --danger: #FF8180; */
+  --danger: #FF8585;
   --danger-hover: #ff6262;
   --danger-active: #d85151;
   /*--danger-active: #A61C1C;
@@ -116,6 +119,9 @@ button:focus-visible {
   --fuente-principal: Arial, Helvetica, sans-serif;
 }
 
+.error{
+  border-color: var(--danger) !important;
+}
 
 body{
   background-color: var(--fondo-1);

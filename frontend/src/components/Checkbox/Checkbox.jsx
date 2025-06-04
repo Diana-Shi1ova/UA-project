@@ -1,9 +1,9 @@
 import "./Checkbox.css";
 
-function Checkbox({chLabel="", chId="", chClass=""}){
+function Checkbox({chLabel="", chName="", chClass="", chChecked=false, chChange=() => []}){
     return(
         <p className="check">
-            <label><input type="checkbox" id={chId} className={chClass}/>{chLabel}</label>
+            <label><input type="checkbox" name={chName} className={chClass} checked={chChecked} onChange={chChange}/>{chLabel}</label>
         </p>
     );
 }

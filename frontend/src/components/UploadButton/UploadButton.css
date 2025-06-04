@@ -1,0 +1,26 @@
+.input-hidden{
+    display: none;
+}
+
+.upload-button{
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: var(--texto);
+    /* font-size: var(--tam-texto); */
+    font-size: 18pt;
+    border: 2px var(--texto) dashed;
+    padding: 3em;
+    width: 100%;
+    margin-top: .1em;
+    svg{
+        margin-right: 1em;
+    }
+}
+
+.upload-button:hover, .upload-button-active{
+    /* background-color: var(--fondo-2); */
+    border-color: var(--primary);
+    border-style: solid;
+    color: var(--primary);
+}

@@ -57,7 +57,71 @@ input {
 	background-color: #f0f0f0;
 }*/
 
+.input-suggestions{
+	position: relative;
 
-.suggestions{
-	
+	.input-button{
+		position: relative;
+		/* width: fit-content; */
+		/* height: fit-content; */
+		.option-plus{
+			position: absolute;
+			right: 0;
+			bottom: 0;
+			border-radius: 10px;
+			border-top-left-radius: 0;
+			border-bottom-left-radius: 0;
+			height: 44.11px;
+			box-sizing: border-box;
+			/* border: 2px solid var(--texto); */
+			svg{
+				margin: 0;
+			}
+		}
+	}
+
+	.suggestions-list{
+		background-color: var(--fondo-2);
+		border: 2px solid var(--texto);
+		border-radius: 7px;
+		position: absolute;
+		width: 100%;
+
+		.hide-list{
+			/* position: absolute; */
+			/* right: 0; */
+			justify-self: right;
+			padding: .3em;
+		}
+
+		.suggestions{
+			margin: 0;
+			list-style: none;
+			padding: 0;
+
+			li{
+				padding: .5em;
+				border-radius: 7px;
+				border: 1px solid transparent;
+				
+			}
+			li:hover{
+				background-color: var(--fondo-2-hover);
+				cursor: pointer;
+				border: 1px solid var(--primary);
+			}
+		}
+	}
+
+	.suggestions-hidden{
+		display: none;
+	}
+}
+
+.tags{
+	list-style: none;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: 1em;
 }

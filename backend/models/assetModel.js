@@ -10,32 +10,40 @@ const assetSchema = new mongoose.Schema(
       type: String,
       default: '',
     },
-    categories: [
+    /*categories: [
       {
         id: { type: mongoose.Schema.Types.ObjectId, ref: 'Category' },
         subcategories: [String]
       }
-    ],
-    tags: [
+    ],*/
+    /*tags: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Tag',
       },
-    ],
+    ],*/
+    tags: [String],
     downloadUrls: [
       {
-        url: { type: String, required: true },
-        size: { type: Number, required: true }, // bytes
-        format: {
+        url: { type: String },
+        size: { type: Number }, // bytes
+        filename: String,
+        /*format: {
           type: mongoose.Schema.Types.ObjectId,
           ref: 'Format',
         },
+        category: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'Category',
+        }*/
+       format: String,
+       category: String
       },
     ],
     previews: [
       {
-        url: { type: String, required: true },
-        type: { type: String, required: true }, // image/video/pdf/etc.
+        url: { type: String },
+        type: { type: String }, // image/video/pdf/etc.
         name: { type: String, default: '' },
       },
     ],

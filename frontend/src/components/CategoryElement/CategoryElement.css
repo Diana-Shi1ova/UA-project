@@ -1,0 +1,6 @@
+.categoryElement{
+    display: flex;
+    svg{
+        margin-right: .5em;
+    }
+}
