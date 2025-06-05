@@ -1,7 +1,7 @@
 import * as FaIcons from "react-icons/fa";
 import "./ButtonX.css";
 
-function ButtonX ({buttonClass, icon, buttonFunction = () => {}, ariaLabel}) {
+function ButtonX ({buttonClass="", icon, buttonFunction = () => {}, ariaLabel}) {
     const IconComponent = FaIcons[icon];
     
     return (

@@ -4,7 +4,7 @@ import Tag from "../Tag/Tag"
 
 import "./AssetCard.css";
 
-function AssetCard(){
+function AssetCard({assetId, preview, category, alt}){
     return(
         <article className="asset-card">
             <Link to="/asset">

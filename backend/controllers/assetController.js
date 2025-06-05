@@ -1,6 +1,8 @@
 const Asset = require('../models/assetModel');
 const { uploadFile, deleteFile } = require('../supabase/supabaseService');
 const archiver = require('archiver');
+const fetch = require('node-fetch');
+const mime = require('mime-types');
 
 // Obtener todos los assets
 const getAssets = async (req, res) => {
@@ -27,6 +29,98 @@ const getAssetByID = async (req, res) => {
         res.status(500).json({ message: 'Server error', error: error.message });
     }
 }
+
+const searchAssets = async (req, res) => {
+    try {
+        const {
+            q,
+            name,
+            categories,
+            formats,
+            tags,
+            authors,
+            dateFrom,
+            dateTo,
+            sortBy = 'newest',
+            page = 1,
+            limit = 20,
+        } = req.query;
+
+        const query = {};
+
+        // búsqueda universal
+        if (q) {
+            const regex = new RegExp(q.trim(), 'i');
+            query.$or = [
+                { name: regex },
+                { tags: { $elemMatch: { $regex: regex } } },
+                { downloadUrls: { $elemMatch: { category: { $regex: regex } } } },
+            ];
+        } else {
+            // sólo si NO hay q
+            if (name) {
+                query.name = { $regex: name, $options: 'i' };
+            }
+
+            // por categorías
+            if (categories) {
+                const arr = Array.isArray(categories) ? categories : categories.split(',');
+                query['downloadUrls.category'] = { $in: arr };
+            }
+
+            // por etiquetas
+            if (tags) {
+                const arr = Array.isArray(tags) ? tags : tags.split(',');
+                query.tags = { $all: arr };
+            }
+
+            // por formatos
+            if (formats) {
+                const arr = Array.isArray(formats) ? formats : formats.split(',');
+                query['downloadUrls.format'] = { $in: arr };
+            }
+
+            // por autores
+            if (authors) {
+                const arr = Array.isArray(authors) ? authors : authors.split(',');
+                query.author = { $in: arr };
+            }
+
+            // por rango de fechas
+            if (dateFrom || dateTo) {
+                query.createdAt = {};
+                if (dateFrom) query.createdAt.$gte = new Date(dateFrom);
+                if (dateTo) query.createdAt.$lte = new Date(dateTo);
+            }
+        }
+
+        // ordenar
+        const sortOption = sortBy === 'likes' ? { likes: -1 } : { createdAt: -1 };
+
+        // paginación
+        const skip = (parseInt(page) - 1) * parseInt(limit);
+
+        const [results, total] = await Promise.all([
+            Asset.find(query)
+                .sort(sortOption)
+                .skip(skip)
+                .limit(parseInt(limit))
+                .populate('author', 'username'),
+            Asset.countDocuments(query),
+        ]);
+
+        res.json({
+            results,
+            total,
+            page: parseInt(page),
+            pages: Math.ceil(total / limit),
+        });
+    } catch (err) {
+        console.error('Asset filter error:', err);
+        res.status(500).json({ error: 'Server error' });
+    }
+};
+
 
 // Crear un asset
 const createAsset = async (req, res) => {
@@ -375,7 +469,7 @@ const downloadAsset = async (req, res) => {
   }
 
   // Un fichero - sin zip
-  if (filenames.length === 1) {
+  /*if (filenames.length === 1) {
     const filename = filenames[0];
     const fileUrl = `https://ovlqvvbzyqzscmsrxcsj.supabase.co/storage/v1/object/public/molamazogames/assets/${user}/${asset}/${filename}`;
     
@@ -387,19 +481,31 @@ const downloadAsset = async (req, res) => {
       }
 
       const buffer = await response.buffer();
-      const mimeType = response.headers.get('content-type') || 'application/octet-stream';
+      //const mimeType = response.headers.get('content-type') || 'application/octet-stream';
+      //res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+      //res.setHeader('Content-Type', mimeType);
+      //res.setHeader('Content-Disposition', `attachment; filename="${filename}"; filename*=UTF-8''${encodeURIComponent(filename)}`);
+      
+      //res.setHeader(
+      //  'Content-Disposition',
+      //  `attachment; filename="${filename}"; filename*=UTF-8''${encodeURIComponent(filename)}`
+      //);
+      //res.setHeader('Content-Type', 'application/octet-stream');
 
+
+      //res.attachment(filename);
       res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+      const mimeType = mime.lookup(filename) || 'application/octet-stream';
       res.setHeader('Content-Type', mimeType);
       return res.send(buffer);
     } catch (err) {
       console.error(err);
       return res.status(500).send('Download failed');
     }
-  }
+  }*/
 
   // Varios ficheros - zip
-  res.setHeader('Content-Disposition', 'attachment; filename="assets.zip"');
+  res.setHeader('Content-Disposition', "attachment; filename*=UTF-8''assets.zip");
   res.setHeader('Content-Type', 'application/zip');
 
   const archive = archiver('zip');
@@ -436,6 +542,7 @@ module.exports = {
     uploadFiles,
     deleteFiles,
     downloadAsset,
+    searchAssets,
 }
 
 

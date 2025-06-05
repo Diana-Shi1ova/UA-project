@@ -1,0 +1,12 @@
+.code-pre{
+    display: flex;
+    /* height: 100%; */
+    /* overflow: scroll; */
+    margin: 0;
+
+    .hljs{
+        width: 700px;
+        overflow-y: auto;
+        height: 400px;
+    }
+}

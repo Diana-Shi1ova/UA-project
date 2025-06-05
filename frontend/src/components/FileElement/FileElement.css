@@ -20,6 +20,10 @@
         height: 20px;
         margin-right: 2em;
     }
+
+    svg{
+        margin-right: .5em;
+    }
 }
 
 .file-element:hover{

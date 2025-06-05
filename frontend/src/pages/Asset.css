@@ -105,9 +105,9 @@
 }
 
 @media all and (width<900px){
-    .preview{
+    /*.preview{
         width: 100% !important;
-    }
+    }*/
 
     .asset-global{
         margin: 1em;
@@ -120,10 +120,49 @@
         flex-direction: column;
         gap: 1em;
     }
+
+    .section-preview{
+        padding: .5em !important;
+    }
+}
+
+@media all and (width<740px){
+    .section-preview{
+        width: 100% !important;
+        .preview{
+            width: 100%;
+            
+            .hljs{
+                width: 500px;
+                justify-self: center;
+            }
+        }
+    }
 }
 
 @media all and (width<600px){
-    .section-preview{
+    .asset-global{
+        margin: 0;
+    }
+    .code-pre{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .hljs{
+        width: 300px !important;
+    }
+}
+
+@media all and (width<450px){
+    .preview{
         padding: 0 !important;
+    }
+}
+
+@media all and (width<735px) {
+    canvas{
+        width: 100% !important;
+
     }
 }

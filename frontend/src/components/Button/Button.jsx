@@ -1,7 +1,7 @@
 import "./Button.css";
 import * as FaIcons from "react-icons/fa";
 
-function Button({buttonClass="", buttonName="", buttonFunction=() => {}, buttonType="button", ariaLabel = "", icon = "", buttonColor="primary"}){
+function Button({buttonClass="", buttonName="", buttonFunction=() => {}, buttonType="button", ariaLabel = "", icon = "", buttonColor="primary", buttonDisabled=false}){
     const IconComponent = FaIcons[icon];
     if(buttonType=="button"){
         return(
@@ -9,6 +9,7 @@ function Button({buttonClass="", buttonName="", buttonFunction=() => {}, buttonT
                 onClick={buttonFunction} 
                 className={"but-svg "+buttonClass+" "+buttonColor} 
                 aria-label={ariaLabel || (typeof buttonName === "string" ? buttonName : "")}
+                disabled={buttonDisabled}
                 // id={buttonId}
             >
                 {IconComponent && <IconComponent />}

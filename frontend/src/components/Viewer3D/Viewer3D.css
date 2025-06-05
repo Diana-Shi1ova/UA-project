@@ -1,8 +1,69 @@
 .viewer-3d{
     border: 2px solid var(--texto);
     border-radius: 7px;
+    position: relative
 }
 
 .viewer-3d:focus-visible{
     border: 2px solid var(--primary);
+}
+
+canvas{
+    height: 400px;
+    width: 100%;
+}
+
+.botones-3d{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    /* background: rgba(255, 255, 255, 0.9); */
+    border: 2px solid var(--primary);
+    padding: 8px;
+    border-radius: 6px;
+
+    .but-svg{
+        align-self: center;
+    }
+
+    svg{
+        margin: 0;
+    }
+
+    .buttons-row{
+        display: flex;
+        flex-direction: row;
+        gap: 6px;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 1em;
+
+        div{
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+    }
+
+    button{
+        width: fit-content;
+        height: fit-content;
+    }
+}
+
+.botones-3d-hidden, .options-hidden{
+    display: none;
+}
+
+.options{
+    position: absolute;
+    top: 10px;
+    left: 10px;
+
+    svg{
+        margin: 0;
+    }
 }

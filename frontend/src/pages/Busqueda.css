@@ -1,0 +1,12 @@
+.section-busqueda{
+    text-align: center;
+
+    ul{
+        padding: 0;
+        list-style: none;
+    }
+
+    .no-encontrado{
+        margin-top: 8em;
+    }
+}

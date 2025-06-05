@@ -11,18 +11,29 @@ import { FaUserPlus } from "react-icons/fa";
 import { FaUser } from "react-icons/fa";
 
 import { useSelector } from 'react-redux';
-
+import { useState } from "react";
 
 
 function Header(){
     const navigate = useNavigate();
     const { user } = useSelector((state) => state.auth);
+    const [query, setQuery] = useState('');
+
+    const onSearchChange = (e) => {
+        setQuery(e.target.value);
+    }
+
+    const searchResults = (e) => {
+        e.preventDefault();
+
+        navigate(`/buscar?q=${query}`);
+    }
 
     return(
         <header className="web-header">
             <div className="header-row">
                 <Link to="/" className="logo"><h1>MOLAMAZOGAMES</h1><img className="logo-img" src={logo} alt="Molamazogames" /></Link>
-                <Search></Search>
+                <Search searchChange={onSearchChange} searchSubmit={searchResults}></Search>
                 
                     {user ? (
                         <div className="botonera">

@@ -23,6 +23,7 @@ function Asset(){
     // const [authorId, setAuthorId] = useState('');
     const [user, setUser] = useState('');
     const [comments, setComments] = useState([]);
+    const [categoryList, setCategoryList] = useState([]);
 
     /*useEffect(() => {
         async function fetchAsset() {
@@ -80,10 +81,19 @@ function Asset(){
         // console.log(totalBytes);
     }
 
+    // Obtener lista de categorías sin repeticiones
+    useEffect(() => {
+        if (asset) {
+            const categories = [...new Set(asset.downloadUrls.map(item => item.category))];
+            setCategoryList(categories);
+        }
+    }, [asset]);
+
     // Añadir comentario
     const addComment = (newComment) => {
         setComments(prevComments => [...prevComments, newComment]);
     }
+    
 
     return(
         <div className="content">
@@ -106,13 +116,17 @@ function Asset(){
                     <section className="section-asset categorias">
                         <h3>Categorías</h3>
                         <ul>
-                            {asset ? (
+                            {/* {asset ? (
                                 asset.downloadUrls.map((item, index) => (
                                     <li key={index}><Link to={`/buscar?category=${item.category}`}><CategoryElement categoryName={item.category}></CategoryElement></Link></li>
                                 ))
                             ) : (
                                 null
-                            )}
+                            )} */}
+                            {categoryList.map((item, index) => (
+                                <li key={index}><Link to={`/buscar?category=${item}`}><CategoryElement categoryName={item}></CategoryElement></Link></li>
+                            ))}
+                            
                         </ul>
                     </section>
                     <section className="section-asset etiquetas">
