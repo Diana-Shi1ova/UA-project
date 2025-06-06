@@ -144,7 +144,7 @@ function Inicio(){
                         <AssetCard></AssetCard> */}
                         {assets_2d && assets_2d.length ? (
                             assets_2d.map((item, index) => (
-                                <AssetCard key={index}></AssetCard>
+                                <AssetCard key={index} asset={item} categoria="2D"></AssetCard>
                         ))) : null}
                     </div>
 
@@ -152,7 +152,7 @@ function Inicio(){
                     <div className="line">
                         {assets_3d && assets_3d.length ? (
                             assets_3d.map((item, index) => (
-                                <AssetCard key={index}></AssetCard>
+                                <AssetCard key={index} asset={item} categoria="3D"></AssetCard>
                         ))) : null}
                     </div>
 
@@ -160,7 +160,7 @@ function Inicio(){
                     <div className="line">
                         {assets_audio && assets_audio.length ? (
                             assets_audio.map((item, index) => (
-                                <AssetCard key={index}></AssetCard>
+                                <AssetCard key={index} asset={item} categoria="Audio"></AssetCard>
                         ))) : null}
                     </div>
 
@@ -168,7 +168,7 @@ function Inicio(){
                     <div className="line">
                         {assets_video && assets_video.length ? (
                             assets_video.map((item, index) => (
-                                <AssetCard key={index}></AssetCard>
+                                <AssetCard key={index} asset={item} categoria="Vídeo"></AssetCard>
                         ))) : null}
                     </div>
 
@@ -176,7 +176,7 @@ function Inicio(){
                     <div className="line">
                         {assets_codigo && assets_codigo.length ? (
                             assets_codigo.map((item, index) => (
-                                <AssetCard key={index}></AssetCard>
+                                <AssetCard key={index} asset={item} categoria="Código"></AssetCard>
                         ))) : null}
                     </div>
 
@@ -184,7 +184,7 @@ function Inicio(){
                     <div className="line">
                         {assets_otros && assets_otros.length ? (
                             assets_otros.map((item, index) => (
-                                <AssetCard key={index}></AssetCard>
+                                <AssetCard key={index} asset={item} categoria="Otros"></AssetCard>
                         ))) : null}
                     </div>
                 </section>

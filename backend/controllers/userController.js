@@ -54,8 +54,15 @@ const createUser = async (req, res) => {
             lastLogin: new Date(),
             avatar
         });
-    
-        res.status(200).json(user);
+
+        res.status(200).json({
+            _id: user.id,
+            name: user.name,
+            email: user.email,
+            avatar: user.avatar,
+            phone: user.phone,
+            token: generateToken(user._id),
+        });
     } catch(error){
         res.status(500).json({ message: 'Server error', error: error.message });
     }

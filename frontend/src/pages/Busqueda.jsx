@@ -82,7 +82,7 @@ function Busqueda(){
                     <section className="section-busqueda">
                         <h2>"{q}"</h2>
                         
-                            {result && result.length ? (
+                            {result && result.results.length ? (
                                 <ul>
                                     {result.results.map((item, index) => (
                                         <li key={index}><AssetListElement asset={item}></AssetListElement></li>
@@ -99,10 +99,10 @@ function Busqueda(){
                         <div className="horizontal">
                             <Filters category={category} authorSuggestions={authors} buscar={buscar}></Filters>
                             
-                                {result && result.length ? (
+                                {result && result.results.length ? (
                                     <ul className={"results "+listStyle}>
                                         {result.results.map((item, index) => (
-                                            <li key={index}><AssetCard asset={item}></AssetCard></li>
+                                            <li key={index}><AssetCard asset={item} categoria={category}></AssetCard></li>
                                         
                                         ))}
                                     </ul>

@@ -31,84 +31,6 @@ function Historial(){
         });
     }, []);
 
-    /*const filtrar = (categoriasFitrar, name, dateFrom, dateTo) => {
-        const fromDate = dateFrom ? new Date(dateFrom + "T00:00:00") : null;
-        const toDate = dateTo ? new Date(dateTo + "T23:59:59.999") : null;
-        console.log(fromDate);
-        const params = {};
-        if(name) params.name = name;
-        if (categoriasFitrar?.length) params.categories = categoriasFitrar.join(',');
-        if (dateFrom) params.dateFrom = dateFrom;
-        if (dateTo) params.dateTo = dateTo;
-
-        axios.get('/api/assets/search/', {
-            params
-        })
-            .then(response => {
-                setResult(response.data);
-                console.log(response.data);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-    }*/
-
-    /*const filtrar = (categs, name, dateFrom, dateTo) => {
-        const fromDate = dateFrom ? new Date(dateFrom + "T00:00:00") : null;
-        const toDate = dateTo ? new Date(dateTo + "T23:59:59.999") : null;
-
-        const filtrados = favoritos.filter(asset => {
-            const matchesCategory =
-            !categs || categs.length === 0 || categs.includes(asset.category);
-
-            const matchesName =
-            !name || asset.name.toLowerCase().includes(name.toLowerCase());
-
-            const assetDate = new Date(asset.createdAt);
-
-            const matchesDateFrom = !fromDate || assetDate >= fromDate;
-            const matchesDateTo = !toDate || assetDate <= toDate;
-
-            return matchesCategory && matchesName && matchesDateFrom && matchesDateTo;
-        });
-
-        setFilteredResult(filtrados);
-    }*/
-
-    /*const filtrar = (categs, name, dateFrom, dateTo) => {
-        if(result?.groupedByDay?.length){
-            const fromDate = dateFrom ? new Date(dateFrom + "T00:00:00") : null;
-            const toDate = dateTo ? new Date(dateTo + "T23:59:59.999") : null;
-
-            const filtrados = result.groupedByDay.map(grupo => {
-                const assetsFiltrados = grupo.assets.filter(asset => {
-                    const matchesCategory =
-                        !categs || categs.length === 0 || categs.includes(asset.category);
-
-                    const matchesName =
-                        !name || asset.name.toLowerCase().includes(name.toLowerCase());
-
-                    const assetDate = new Date(asset.createdAt);
-
-                    const matchesDateFrom = !fromDate || assetDate >= fromDate;
-                    const matchesDateTo = !toDate || assetDate <= toDate;
-
-                    return matchesCategory && matchesName && matchesDateFrom && matchesDateTo;
-                });
-
-                return {
-                    _id: grupo._id,
-                    assets: assetsFiltrados,
-                    count: assetsFiltrados.length
-                };
-            }).filter(grupo => grupo.assets.length > 0); // Borrar grupos vacíos
-
-            console.log(filtrados);
-            setFilteredResult({ groupedByDay: filtrados });
-        }
-        
-    };*/
-
     const filtrar = (categs, name, dateFrom, dateTo) => {
         if(result?.groupedByDay?.length){
             const fromDate = dateFrom ? new Date(dateFrom + "T00:00:00") : null;
@@ -116,7 +38,7 @@ function Historial(){
 
             const filtrados = result.groupedByDay
                 .map(grupo => {
-                    // Собираем дату из _id
+                    // Obtenemos fecha
                     const groupDate = new Date(grupo._id.year, grupo._id.month - 1, grupo._id.day);
 
                     const matchesDateFrom = !fromDate || groupDate >= fromDate;
@@ -125,17 +47,17 @@ function Historial(){
                     if (!matchesDateFrom || !matchesDateTo) return null;
 
                     const assetsFiltrados = grupo.assets.filter(asset => {
-                        // Проверка имени
+                        // Comprobacón del nombre
                         const matchesName = !name || asset.name.toLowerCase().includes(name.toLowerCase());
 
-                        // Проверка категорий: ищем хотя бы одно совпадение в downloadUrls
+                        // Comprobación de categorías
                         const matchesCategory = !categs || categs.length === 0 || 
                             asset.downloadUrls?.some(url => categs.includes(url.category));
 
                         return matchesName && matchesCategory;
                     });
 
-                    // Возвращаем новый объект только если остались ассеты
+                    // Devolvemos solo si hay assets
                     if (assetsFiltrados.length > 0) {
                         return {
                             _id: grupo._id,
@@ -146,7 +68,7 @@ function Historial(){
 
                     return null;
                 })
-                .filter(Boolean); // Убираем null
+                .filter(Boolean); // Eliminar null
 
             setFilteredResult({ groupedByDay: filtrados });
         }

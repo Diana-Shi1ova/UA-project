@@ -10,6 +10,7 @@ const {
     downloadAsset,
     searchAssets,
     getAssetsByIds,
+    getAssetsByUserId,
 } = require('../controllers/assetController');
 const router = express.Router();
 
@@ -20,6 +21,7 @@ const upload = multer({ storage: multer.memoryStorage() });
 router.route('/').get(getAssets).post(upload.array('files[]'),createAsset);
 router.route('/search').get(searchAssets);
 router.route('/by-ids').post(getAssetsByIds);
+router.route('/user/:id').get(getAssetsByUserId);
 router.route('/:id').get(getAssetByID).delete(deleteAsset).put(upload.array('files[]'), updateAsset);
 router.route('/:id/files').post(upload.array('files[]'), uploadFiles).delete(deleteFiles);
 router.route('/:id/files-delete').post(deleteFiles);

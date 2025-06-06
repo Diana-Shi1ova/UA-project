@@ -39,8 +39,11 @@ function Favoritos(){
         const toDate = dateTo ? new Date(dateTo + "T23:59:59.999") : null;*/
     const filtrar = (categs, name, dateFrom, dateTo) => {
         const filtrados = favoritos.filter(asset => {
-            const matchesCategory =
-            !categs || categs.length === 0 || categs.includes(asset.category);
+            /*const matchesCategory =
+            !categs || categs.length === 0 || categs.includes(asset.category);*/
+            // Comprobación de categorías
+            const matchesCategory = !categs || categs.length === 0 || 
+            asset.downloadUrls?.some(url => categs.includes(url.category));
 
             const matchesName =
             !name || asset.name.toLowerCase().includes(name.toLowerCase());
