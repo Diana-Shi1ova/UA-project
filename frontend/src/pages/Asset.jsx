@@ -16,9 +16,11 @@ import FormattedDate from "../components/FormattedDate/FormattedDate";
 import FileSize from "../components/FileSize/FileSize";
 import Comment from "../components/Comentario/Comment";
 import CategoryElement from "../components/CategoryElement/CategoryElement";
+import { useSelector } from "react-redux";
 
 function Asset(){
     const {id} = useParams();
+    const userId = useSelector((state) => state.auth.user._id);
     const [asset, setAsset] = useState(null);
     // const [authorId, setAuthorId] = useState('');
     const [user, setUser] = useState('');
@@ -68,6 +70,21 @@ function Asset(){
             .then(response => {
                 console.log('Comments:', response.data);
                 setComments(response.data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }, []);
+
+    useEffect(() => {
+        axios.post('/api/histories', 
+            {
+                user: userId,
+                asset: id
+            }
+        )
+            .then(response => {
+                console.log('Historial:', response.data);
             })
             .catch(error => {
                 console.error('Error:', error);

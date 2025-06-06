@@ -7,6 +7,7 @@ import axios from 'axios';
 import { FaTimes } from "react-icons/fa";
 import Parameter from '../Parameter/Parameter';
 import ButtonX from '../ButtonX/ButtonX';
+import { useRef } from 'react';
 
 /*export default function SuggestionsInput({ suggestions = [], onTagsChange }) {
     suggestions = ["3D", "анимация", "геймдев", "вектор", "модель"];
@@ -83,13 +84,15 @@ import ButtonX from '../ButtonX/ButtonX';
 }*/
 
 
-function SuggestionsInput({suggestions=[], labelText, inputName, ariaLabel, search=true, returnValues}) {
+function SuggestionsInput({suggestions=[], labelText, inputName, ariaLabel, search=true, returnValues, reset=false}) {
 	const [inputValue, setInputValue] = useState('');
 	const [tags, setTags] = useState([]);
 	const [filteredSuggestions, setFilteredSuggestions] = useState([]);
+	const listRef = useRef(null);
+	const prevResetRef = useRef(reset);
 
 	useEffect(() => {
-		const listEl = document.querySelector('.suggestions-list');
+		/*const listEl = document.querySelector('.suggestions-list');
 
 		if (listEl) {
 			if (filteredSuggestions.length === 0) {
@@ -97,8 +100,27 @@ function SuggestionsInput({suggestions=[], labelText, inputName, ariaLabel, sear
 			} else {
 				listEl.classList.remove('suggestions-hidden');
 			}
+		}*/
+		if (listRef.current) {
+			if (filteredSuggestions.length === 0) {
+				listRef.current.classList.add('suggestions-hidden');
+			} else {
+				listRef.current.classList.remove('suggestions-hidden');
+			}
 		}
 	}, [filteredSuggestions]);
+
+	useEffect(() => {
+		//if (reset && !prevResetRef.current) {// solo si cambia false a true
+		if (reset) {
+			if (listRef.current) {
+				listRef.current.classList.add('suggestions-hidden');
+			}
+			setInputValue('');
+			setTags([]);
+		}
+		//prevResetRef.current = reset;
+	}, [reset])
 
 	useEffect(() => {
 		returnValues(tags);
@@ -109,12 +131,12 @@ function SuggestionsInput({suggestions=[], labelText, inputName, ariaLabel, sear
 		addTag(inputValue.trim());
     }
 
-	/*const handleKeyDown = (e) => {
+	const handleEnter = (e) => {
 		if (e.key === 'Enter' && inputValue.trim()) {
 			e.preventDefault();
 			addTag(inputValue.trim());
 		}
-	};*/
+	};
 
 	const addTag = (tag) => {
 		if (!tags.includes(tag.toLowerCase()) && tag!=="") {
@@ -159,17 +181,20 @@ function SuggestionsInput({suggestions=[], labelText, inputName, ariaLabel, sear
     }
 
 	const hide = () => {
-		document.querySelector('.suggestions-list').classList.add('suggestions-hidden');
+		// document.querySelector('.suggestions-list').classList.add('suggestions-hidden');
+		if (listRef.current) {
+			listRef.current.classList.add('suggestions-hidden');
+		}
 	}
 
     return(
         <>
 			<div className='input-suggestions'>
 				<div className='input-button'>
-					<Input inputName={inputName} labelText={labelText} inputTipo="text" inputValue={inputValue} inputChange={onChange}></Input>
+					<Input inputName={inputName} labelText={labelText} inputTipo="text" inputValue={inputValue} inputChange={onChange} inputKeyDown={handleEnter}></Input>
 					<Button buttonFunction={addTagBut} buttonClass='option-plus' icon='FaPlus' ariaLabel={ariaLabel}></Button>
 				</div>
-				<div className='suggestions-list suggestions-hidden'>
+				<div ref={listRef} className='suggestions-list suggestions-hidden'>
 					<ButtonX buttonClass="hide-list" buttonFunction={hide} ariaLabel="Esconder sugerencias" icon="FaTimes"></ButtonX>
 					{/* <button type='button' className='hide-list' onClick={hide} aria-label="Esconder sugerencias"><FaTimes /></button> */}
 					{filteredSuggestions.length > 0 && (

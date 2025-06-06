@@ -86,6 +86,7 @@ input {
 		border-radius: 7px;
 		position: absolute;
 		width: 100%;
+		z-index: 1000;
 
 		.hide-list{
 			/* position: absolute; */

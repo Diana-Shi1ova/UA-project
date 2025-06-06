@@ -1,0 +1,19 @@
+.filters{
+    background-color: var(--fondo-2);
+    padding: 1em;
+    text-align: left;
+
+    label{
+        margin-top: 1em;
+    }
+
+    #name{
+        margin-bottom: 1em;
+    }
+    
+    .input-suggestions{
+        label{
+            margin-top: 0;
+        }
+    }
+}

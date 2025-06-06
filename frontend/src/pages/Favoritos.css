@@ -1,0 +1,30 @@
+.favoritos{
+    text-align: center;
+    width: 100%;
+    padding: 3em;
+    box-sizing: border-box;
+    padding-top: 0;
+
+    .no-encontrado{
+        width: 100%;
+    }
+
+    .horizontal{
+        display: flex;
+        flex-direction: row;
+        gap: 3em;
+        margin-bottom: 3em;
+        width: 100%;
+        
+        .favoritos-list{
+            order: 1;
+            padding: 0;
+            list-style: none;
+            width: 100%;
+        }
+
+        .filtros-assets{
+            order: 2;
+        }
+    }
+}

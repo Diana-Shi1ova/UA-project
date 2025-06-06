@@ -1,4 +1,5 @@
 const Format = require('../models/formatModel');
+const Category = require('../models/categoryModel');
 
 // Obtener todos los categories
 const getFormats = async (req, res) => {
@@ -27,35 +28,57 @@ const getFormats = async (req, res) => {
 // Obtener formatos agrupados por categoría
 const getFormatsByCategory = async (req, res) => {
     try {
-        const result = await Format.aggregate([
-        {
-            $lookup: {
-            from: "categories",
-            localField: "category",
-            foreignField: "_id",
-            as: "categoryInfo"
-            }
-        },
-        {
-            $unwind: "$categoryInfo"
-        },
-        {
-            $group: {
-            _id: "$category",
-            categoryName: { $first: "$categoryInfo.name" },
-            formats: { $addToSet: "$extention" }
-            }
-        },
-        {
-            $project: {
-            _id: 0,
-            categoryId: "$_id",
-            categoryName: 1,
-            formats: 1
-            }
-        }
-        ]);
+        const { category } = req.query;
 
+        const pipeline = [];
+
+        // Si hay categoría
+        if (category) {
+            const categoryDoc = await Category.findOne({
+                name: new RegExp(`^${category}$`, 'i')
+            });
+
+            if (!categoryDoc) {
+                return res.status(404).json({ error: 'Category not found' });
+            }
+
+            pipeline.push({
+                $match: {
+                    category: categoryDoc._id
+                }
+            });
+        }
+
+        pipeline.push(
+            {
+                $lookup: {
+                from: "categories",
+                localField: "category",
+                foreignField: "_id",
+                as: "categoryInfo"
+                }
+            },
+            {
+                $unwind: "$categoryInfo"
+            },
+            {
+                $group: {
+                _id: "$category",
+                categoryName: { $first: "$categoryInfo.name" },
+                formats: { $addToSet: "$extention" }
+                }
+            },
+            {
+                $project: {
+                _id: 0,
+                categoryId: "$_id",
+                categoryName: 1,
+                formats: 1
+                }
+            }
+        );
+
+        const result = await Format.aggregate(pipeline);
         res.json(result);
     } catch (error) {
         console.error(error);

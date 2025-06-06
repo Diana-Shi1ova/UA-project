@@ -1,6 +1,6 @@
 import "./Input.css";
 
-function Input({ labelText, inputName = "", inputTipo, inputChange=()=>{}, inputValue, options = []}){
+function Input({ labelText, inputName = "", inputTipo, inputChange=()=>{}, inputKeyDown=()=>{}, inputValue, options = []}){
     return(
         inputTipo==="textarea" ? (
             <p className="input-form">
@@ -21,7 +21,7 @@ function Input({ labelText, inputName = "", inputTipo, inputChange=()=>{}, input
         ) : (
             <p className="input-form">
                 <label htmlFor={inputName}>{labelText}</label>
-                <input type={inputTipo} name={inputName} id={inputName} autoComplete="on" onChange={inputChange} value={inputValue}/>
+                <input type={inputTipo} name={inputName} id={inputName} autoComplete="on" onChange={inputChange} value={inputValue} onKeyDown={inputKeyDown}/>
             </p>
         )
     );

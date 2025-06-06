@@ -1,8 +1,11 @@
 const Asset = require('../models/assetModel');
+const User = require('../models/userModel');
+const Format = require('../models/formatModel');
 const { uploadFile, deleteFile } = require('../supabase/supabaseService');
 const archiver = require('archiver');
 const fetch = require('node-fetch');
 const mime = require('mime-types');
+const mongoose = require('mongoose');
 
 // Obtener todos los assets
 const getAssets = async (req, res) => {
@@ -30,6 +33,27 @@ const getAssetByID = async (req, res) => {
     }
 }
 
+const getAssetsByIds = async (req, res) => {
+  try {
+    const { ids } = req.body;
+
+    if (!Array.isArray(ids)) {
+      return res.status(400).json({ error: 'Waiting for array of ids' });
+    }
+
+    const objectIds = ids.map(id => new mongoose.Types.ObjectId(id));
+
+    const assets = await Asset.find({ _id: { $in: objectIds } });
+
+    res.json(assets);
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+};
+
+
+// Filtrado de assets
 const searchAssets = async (req, res) => {
     try {
         const {
@@ -48,6 +72,8 @@ const searchAssets = async (req, res) => {
 
         const query = {};
 
+        console.log(req.query);
+        
         // búsqueda universal
         if (q) {
             const regex = new RegExp(q.trim(), 'i');
@@ -64,26 +90,72 @@ const searchAssets = async (req, res) => {
 
             // por categorías
             if (categories) {
+                console.log(req.query.categories)
                 const arr = Array.isArray(categories) ? categories : categories.split(',');
-                query['downloadUrls.category'] = { $in: arr };
+                // query['downloadUrls.category'] = { $in: arr };
+                query.downloadUrls = { $elemMatch: { category: { $in: arr } } };
             }
 
             // por etiquetas
             if (tags) {
                 const arr = Array.isArray(tags) ? tags : tags.split(',');
-                query.tags = { $all: arr };
+                // query.tags = { $all: arr };
+                query.tags = { $in: arr.map(n => new RegExp(`^${n}$`, 'i')) };
             }
 
             // por formatos
+            /*if (formats) {
+                const arr = Array.isArray(formats) ? formats : formats.split(',');
+                // query['downloadUrls.format'] = { $in: arr };
+                query.downloadUrls = { $elemMatch: { format: { $in: arr } } };
+            }*/
             if (formats) {
                 const arr = Array.isArray(formats) ? formats : formats.split(',');
-                query['downloadUrls.format'] = { $in: arr };
+
+                // Comprobamos si hay 'Otro'
+                const hasOtro = arr.includes("Otro");
+
+                if (hasOtro) {
+                    // Eliminamos 'Otro'
+                    const realFormats = arr.filter(f => f !== "Otro");
+
+                    // Obtenemos todos los formatos
+                    const allFormats = await Format.find({}, 'extention').lean();
+                    const knownFormats = allFormats.map(f => f.extention);
+
+                    // Creamos condición
+                    //   uno de realFormats
+                    //   o formato que no está
+                    query.downloadUrls = {
+                        $elemMatch: {
+                            $or: [
+                                { format: { $in: realFormats } },
+                                { format: { $nin: knownFormats } }
+                            ]
+                        }
+                    };
+                } else {
+                    // Filtro normal por formatos
+                    query.downloadUrls = { $elemMatch: { format: { $in: arr } } };
+                }
             }
 
             // por autores
             if (authors) {
-                const arr = Array.isArray(authors) ? authors : authors.split(',');
-                query.author = { $in: arr };
+                /*const arr = Array.isArray(authors) ? authors : authors.split(',');
+                query.author = { $in: arr };*/
+                const names = Array.isArray(authors) ? authors : authors.split(',');
+
+                const matchedUsers = await User.find({
+                    // username: { $in: names }
+                    name: { $in: names.map(n => new RegExp(`^${n}$`, 'i')) }
+                }, '_id');
+
+                console.log('matched users:', matchedUsers);
+
+                const ids = matchedUsers.map(user => user._id);
+
+                query.author = { $in: ids };
             }
 
             // por rango de fechas
@@ -104,16 +176,37 @@ const searchAssets = async (req, res) => {
             Asset.find(query)
                 .sort(sortOption)
                 .skip(skip)
-                .limit(parseInt(limit))
-                .populate('author', 'username'),
+                .limit(parseInt(limit)),
+                // .populate('author', 'username'),
             Asset.countDocuments(query),
         ]);
+
+        // Obtener nombres de los autores
+        /*const authorUsernames = [
+            ...new Set(
+                results
+                .map(asset => asset.author?.username)
+                .filter(Boolean) // excluir undefined
+            )
+        ];*/
+
+        // Encontrar ids de usuarios sin duplicados
+        const authorIds = [
+        ...new Set(results.map(asset => asset.author?.toString()).filter(Boolean))
+        ];
+
+        // Encontrar usuarios
+        const users = await User.find({ _id: { $in: authorIds } }, 'name');
+
+        // Crear array de nombres de usuarios
+        const authorUsernames = users.map(user => user.name);
 
         res.json({
             results,
             total,
             page: parseInt(page),
             pages: Math.ceil(total / limit),
+            authors: authorUsernames
         });
     } catch (err) {
         console.error('Asset filter error:', err);
@@ -543,6 +636,8 @@ module.exports = {
     deleteFiles,
     downloadAsset,
     searchAssets,
+    getAssetsByIds,
+    
 }
 
 

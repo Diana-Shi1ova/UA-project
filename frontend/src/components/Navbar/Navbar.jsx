@@ -31,12 +31,12 @@ function Navbar(){
             <input type="checkbox" id="chk-nav"/>
             <ul className="menu">
                 <li><Link to="/"><FaHome />Inicio</Link></li>
-                <li><Link to="/buscar?category=2D"><FaImage />2D</Link></li>
-                <li><Link to="/buscar?category=3D"><FaCube />3D</Link></li>
-                <li><Link to="/buscar?category=Audio"><FaItunesNote />Audio</Link></li>
-                <li><Link to="/buscar?category=Video"><FaVideo />Vídeo</Link></li>
-                <li><Link to="/buscar?category=Codigo"><FaCode />Código</Link></li>
-                <li><Link to="/buscar?category=Otros"><FaEllipsisH />Otros</Link></li>
+                <li><Link to="/buscar/2D"><FaImage />2D</Link></li>
+                <li><Link to="/buscar/3D"><FaCube />3D</Link></li>
+                <li><Link to="/buscar/Audio"><FaItunesNote />Audio</Link></li>
+                <li><Link to="/buscar/Vídeo"><FaVideo />Vídeo</Link></li>
+                <li><Link to="/buscar/Código"><FaCode />Código</Link></li>
+                <li><Link to="/buscar/Otros"><FaEllipsisH />Otros</Link></li>
             </ul>
         </nav>
     );
