@@ -2,6 +2,17 @@
     border: 1px solid var(--texto);
     border-radius: 7px;
     padding: 1em;
+    position: relative;
+
+    button{
+        position: absolute;
+        right: .5em;
+        bottom: .5em;
+
+        svg{
+            margin: 0;
+        }
+    }
 
     p{
         margin: 0;

@@ -1,10 +1,13 @@
 import "./Comment.css";
 import { useEffect, useState } from "react";
 import FormattedDate from "../FormattedDate/FormattedDate";
+import { useSelector } from "react-redux";
+import Button from "../Button/Button";
 import axios from "axios";
 
-function Comment ({commentData}) {
+function Comment ({commentData, deleteCom=()=>{}}) {
     const [user, setUser] = useState('');
+    const userId = useSelector((state) => state.auth.user._id);
 
     if(commentData){
         useEffect(() => {
@@ -18,6 +21,19 @@ function Comment ({commentData}) {
                 });
         }, [commentData]);
 
+        const deleteComment = (e) => {
+            e.preventDefault();
+
+            axios.delete(`/api/comments/${commentData._id}`)
+                .then(response => {
+                    console.log('Deleted:', response.data);
+                    deleteCom(commentData._id);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
         return (
             <div className="comment">
                 {/* <p>Diana Shilova</p>
@@ -26,6 +42,9 @@ function Comment ({commentData}) {
                 <p className="user">{user}</p>
                 <FormattedDate dateISO={commentData.createdAt}></FormattedDate>
                 <p className="content">{commentData.content}</p>
+                {userId ? (
+                    <Button ariaLabel="Eliminar comentario" icon="FaRegTrashAlt" buttonColor="danger" buttonFunction={deleteComment}></Button>
+                ) : null}
             </div>
         );
     }

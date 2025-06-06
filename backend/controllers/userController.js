@@ -150,12 +150,6 @@ const deleteAvatar = async (req, res) => {
     if (user.avatar === '/src/assets/avatar-empty.png')
         return res.status(200).json({ message: 'Avatar already deleted' });
 
-    // Преобразовать publicUrl обратно в путь в бакете
-    // Например, если publicUrl = https://xyz.supabase.co/storage/v1/object/public/molamazogames/avatars/123/photo.jpg
-    // Тогда filePath = 'avatars/123/photo.jpg'
-    /*const supabaseUrl = process.env.SUPABASE_URL.replace('https://', '');
-    const filePath = user.avatar.split(`/${supabaseUrl}/storage/v1/object/public/molamazogames/`)[1];*/
-
     // Obtener  path
     const bucketPath = '/storage/v1/object/public/molamazogames/';
     const filePath = user.avatar.split(bucketPath)[1];

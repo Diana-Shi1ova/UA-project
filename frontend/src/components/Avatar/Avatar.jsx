@@ -35,13 +35,13 @@ function Avatar(){
                 <img src={user.avatar} alt="Mostrar opciones de perfil"/>
             </button>
             
-            <div className="opciones" aria-live="polite">
-                <Button buttonName="Perfil" icon="FaUser" buttonFunction={() => navigate('/perfil')}></Button>
-                <Button buttonName="Mis datos" icon="FaCog" buttonFunction={() => navigate('/mis-datos')}></Button>
-                <Button buttonName="Historial" icon="FaRegClock" buttonFunction={() => navigate('/historial')}></Button>
-                <Button buttonName="Favoritos" icon="FaHeart" buttonFunction={() => navigate('/favoritos')}></Button>
-                <Button buttonName="Cerrar sesión" icon="FaSignOutAlt" buttonFunction={cerrarSesion}></Button>
-            </div>
+            <ul className="opciones" aria-live="polite">
+                <li><Button buttonName="Perfil" icon="FaUser" buttonFunction={() => navigate('/perfil')}></Button></li>
+                <li><Button buttonName="Mis datos" icon="FaCog" buttonFunction={() => navigate('/mis-datos')}></Button></li>
+                <li><Button buttonName="Historial" icon="FaRegClock" buttonFunction={() => navigate('/historial')}></Button></li>
+                <li><Button buttonName="Favoritos" icon="FaHeart" buttonFunction={() => navigate('/favoritos')}></Button></li>
+                <li><Button buttonName="Cerrar sesión" icon="FaSignOutAlt" buttonFunction={cerrarSesion}></Button></li>
+            </ul>
         </div>
     );
 }

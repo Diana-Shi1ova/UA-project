@@ -9,87 +9,36 @@ import Parameter from '../Parameter/Parameter';
 import ButtonX from '../ButtonX/ButtonX';
 import { useRef } from 'react';
 
-/*export default function SuggestionsInput({ suggestions = [], onTagsChange }) {
-    suggestions = ["3D", "анимация", "геймдев", "вектор", "модель"];
-  const [inputValue, setInputValue] = useState('');
-  const [tags, setTags] = useState([]);
-  const [filteredSuggestions, setFilteredSuggestions] = useState([]);
 
-  const handleInputChange = (e) => {
-    const value = e.target.value;
-    setInputValue(value);
-
-    // Фильтруем подсказки
-    const filtered = suggestions.filter(
-      (tag) => tag.toLowerCase().includes(value.toLowerCase()) && !tags.includes(tag)
-    );
-    setFilteredSuggestions(filtered);
-  };
-
-  const addTag = (tag) => {
-    if (!tags.includes(tag)) {
-      const newTags = [...tags, tag];
-      setTags(newTags);
-      setInputValue('');
-      setFilteredSuggestions([]);
-      onTagsChange?.(newTags); // Callback
-    }
-  };
-
-  const removeTag = (tagToRemove) => {
-    const newTags = tags.filter((tag) => tag !== tagToRemove);
-    setTags(newTags);
-    onTagsChange?.(newTags); // Callback
-  };
-
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter' && inputValue.trim()) {
-      e.preventDefault();
-      addTag(inputValue.trim());
-    }
-  };
-
-  return (
-    <div className="tag-input">
-        <input
-            type="text"
-            value={inputValue}
-            onChange={handleInputChange}
-            onKeyDown={handleKeyDown}
-            placeholder="Добавьте тэг..."
-            aria-label="Добавить тэг"
-        />
-      <div className="tags">
-        {tags.map((tag) => (
-          <span className="tag" key={tag}>
-            {tag}
-            <button type="button" onClick={() => removeTag(tag)}>&times;</button>
-          </span>
-        ))}
-      </div>
-
-      
-
-      {filteredSuggestions.length > 0 && (
-        <ul className="suggestions">
-          {filteredSuggestions.map((suggestion) => (
-            <li key={suggestion} onClick={() => addTag(suggestion)}>
-              {suggestion}
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
-  );
-}*/
-
-
-function SuggestionsInput({suggestions=[], labelText, inputName, ariaLabel, search=true, returnValues, reset=false}) {
+function SuggestionsInput({suggestions=[], existingValues=[], labelText, inputName, ariaLabel, search=true, returnValues, reset=false}) {
 	const [inputValue, setInputValue] = useState('');
 	const [tags, setTags] = useState([]);
 	const [filteredSuggestions, setFilteredSuggestions] = useState([]);
 	const listRef = useRef(null);
 	const prevResetRef = useRef(reset);
+
+	const [initialized, setInitialized] = useState(false);
+
+	useEffect(() => {
+		if (!initialized && existingValues && existingValues.length > 0) {
+			setTags(existingValues);
+			setInitialized(true);
+		}
+	}, [existingValues, initialized]);
+
+	/*useEffect(() => {
+		if (existingValues) {
+			console.log('existing', existingValues)
+			setTags(existingValues);
+		}
+	}, [])*/
+
+	/*useEffect(() => {
+		if (existingValues && existingValues.length > 0) {
+			console.log('existing', existingValues);
+			setTags(existingValues);
+		}
+	}, [existingValues]);*/
 
 	useEffect(() => {
 		/*const listEl = document.querySelector('.suggestions-list');
@@ -124,7 +73,7 @@ function SuggestionsInput({suggestions=[], labelText, inputName, ariaLabel, sear
 
 	useEffect(() => {
 		returnValues(tags);
-	})
+	}, [tags])
 
     const addTagBut = (e) => {
         e.preventDefault();

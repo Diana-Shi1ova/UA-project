@@ -43,6 +43,66 @@ const createTag = async (req, res) => {
     }
 }
 
+// Crear varios tags
+/*const createTags = async (req, res) => {
+    try {
+        const names = req.body.names;
+
+        if (!Array.isArray(names) || names.length === 0) {
+            return res.status(400).json({ message: 'No tag names provided' });
+        }
+
+        const existingTags = await Tag.find({ name: { $in: uniqueNames } });
+        const existingNames = existingTags.map(tag => tag.name);
+
+        const newNames = uniqueNames.filter(name => !existingNames.includes(name));
+        const tagsToCreate = newNames.map(name => ({ name }));
+        // const tagsToCreate = names.map(name => ({ name }));
+
+        const createdTags = await Tag.insertMany(tagsToCreate);
+
+        res.status(200).json(createdTags);
+    } catch (error) {
+        res.status(500).json({ message: 'Server error', error: error.message });
+    }
+};*/
+
+const createTags = async (req, res) => {
+    try {
+        const names = req.body.tags;
+
+        // Verificamos que se haya enviado un arreglo con nombres
+        if (!Array.isArray(names) || names.length === 0) {
+            return res.status(400).json({ message: 'No se proporcionaron nombres de tags' });
+        }
+
+        // Eliminamos duplicados y espacios en blanco al inicio y final de cada nombre
+        const uniqueNames = [...new Set(names.map(name => name.trim()))];
+
+        // Buscamos en la base de datos los tags que ya existen con esos nombres
+        const existingTags = await Tag.find({ name: { $in: uniqueNames } });
+        const existingNames = existingTags.map(tag => tag.name);
+
+        // Filtramos para quedarnos solo con los nombres nuevos que no existen aún
+        const newNames = uniqueNames.filter(name => !existingNames.includes(name));
+
+        // Creamos los objetos para insertar en la base de datos
+        const tagsToCreate = newNames.map(name => ({ name }));
+
+        // Insertamos los nuevos tags en la base de datos
+        const createdTags = await Tag.insertMany(tagsToCreate);
+
+        // Respondemos con los tags creados
+        res.status(200).json(createdTags);
+    } catch (error) {
+        // En caso de error, respondemos con un mensaje y el error
+        res.status(500).json({ message: 'Error en el servidor', error: error.message });
+    }
+};
+
+
+
+
 // Modificar un tag
 const updateTag = async (req, res) => {
     try{
@@ -81,4 +141,5 @@ module.exports = {
     updateTag,
     createTag,
     deleteTag,
+    createTags,
 }

@@ -86,6 +86,23 @@ const deleteHistory = async (req, res) => {
     }
 }
 
+// Borrar todos los histories de un usuario
+const deleteHistoriesByUser = async (req, res) => {
+  try {
+    const userId = req.params.id;
+
+    const result = await History.deleteMany({ user: userId });
+
+    /*if (result.deletedCount === 0) {
+      return res.status(404).json({ message: 'No se encontraron histories para eliminar' });
+    }*/
+
+    res.status(200).json({ message: `Se eliminaron ${result.deletedCount} histories del usuario ${userId}` });
+  } catch (error) {
+    res.status(500).json({ message: 'Error del servidor', error: error.message });
+  }
+};
+
 // Agrupar por día para un usuario concreto
 const getUserAssetsGroupedByDay = async (req, res) => {
     try {
@@ -154,4 +171,5 @@ module.exports = {
     createHistory,
     deleteHistory,
     getUserAssetsGroupedByDay,
+    deleteHistoriesByUser,
 }

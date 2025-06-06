@@ -111,6 +111,13 @@ function Asset(){
         setComments(prevComments => [...prevComments, newComment]);
     }
     
+    // Eliminar comentario
+    const deleteCom = (comId) => {
+        console.log("comments", comments)
+        const nuevoArray = comments.filter(obj => obj._id !== comId);
+        console.log("nuevoArray", nuevoArray);
+        setComments(nuevoArray);
+    }
 
     return(
         <div className="content">
@@ -125,7 +132,7 @@ function Asset(){
                         <p>Tamaño:</p>{asset ? (<FileSize bytes={totalBytes}></FileSize>) : null}
                         <p>Fecha de publicación:</p>{asset ? (<FormattedDate dateISO={asset.createdAt}></FormattedDate>) : null}
                         <p>Fecha de modificación:</p>{asset ? (<FormattedDate dateISO={asset.updatedAt}></FormattedDate>) : null} */}
-                        <div><p className="title">Autor:</p><p>{user.name}</p></div>
+                        <div><p className="title">Autor:</p><p className="user-avatar"><img className="mini-avatar" src={user.avatar} alt={"Avatar de "+user.name} />{user.name}</p></div>
                         <div><p className="title">Tamaño:</p>{asset ? (<FileSize bytes={totalBytes}></FileSize>) : null}</div>
                         <div><p className="title">Fecha de publicación:</p>{asset ? (<FormattedDate dateISO={asset.createdAt}></FormattedDate>) : null}</div>
                         <div><p className="title">Fecha de modificación:</p>{asset ? (<FormattedDate dateISO={asset.updatedAt}></FormattedDate>) : null}</div>
@@ -169,12 +176,10 @@ function Asset(){
                         <ul>
                             {comments ? (
                                 comments.map((item, index) => (
-                                    <li key={index}><Comment commentData={item}></Comment></li>
+                                    <li key={index}><Comment commentData={item} deleteCom={deleteCom}></Comment></li>
                                 ))
                             ) : null}
                         </ul>
-                        
-                        <Comment></Comment>
                     </section>
                     
 

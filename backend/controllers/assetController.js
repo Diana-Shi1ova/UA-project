@@ -282,11 +282,35 @@ const updateAsset = async (req, res) => {
     try{
         const asset = await Asset.findById(req.params.id);
 
-        /*if(!asset){
+        if(!asset){
             return res.status(404).json({ message: 'Asset not found' });
-        }*/
+        }
 
-        const update = await Asset.findByIdAndUpdate(req.params.id, req.body, {new: true});
+        const update = await Asset.findByIdAndUpdate(req.params.id, {
+            name: req.body.name,
+            description: req.body.description,
+            // categories: req.body.categories,
+            tags: req.body.tags,
+            // downloadUrls: req.body.downloadUrls,
+            // previews: req.body.previews,
+            //author: req.body.author,
+            //likes: 0,
+        },  {new: true});
+       
+
+        //const update = await Asset.findByIdAndUpdate(req.params.id, req.body, {new: true});
+
+        if(req.files && req.files.length > 0){
+            const newReq = {
+                ...req,
+                params: { ...(req.params || {}), id: asset.id },
+                body: req.body,
+                files: req.files,
+            };
+
+            await uploadFiles(newReq);
+        }
+
         res.status(200).json(update);
     } catch(error){
         res.status(500).json({ message: 'Server error', error: error.message });
@@ -399,11 +423,22 @@ const uploadFiles = async (req) => {
 
         const uploadedFiles = await Promise.all(uploadPromises);
 
-        const updatedAsset = await Asset.findByIdAndUpdate(
+        /*const updatedAsset = await Asset.findByIdAndUpdate(
             assetId,
             { downloadUrls: uploadedFiles },
             { new: true }
+        );*/
+
+        const updatedAsset = await Asset.findByIdAndUpdate(
+            assetId,
+            {
+                $push: {
+                    downloadUrls: { $each: uploadedFiles }
+                }
+            },
+            { new: true }
         );
+
 
         /*const updatedAsset = await Asset.findByIdAndUpdate(
             assetId,

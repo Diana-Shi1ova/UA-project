@@ -13,12 +13,9 @@ import { useSelector } from "react-redux";
 import ErrorMessage from "../components/ErrorMessage/ErrorMessage";
 import { useNavigate } from "react-router-dom";
 import Spinner from "../components/Spinner/Spinner";
-import { useParams } from 'react-router-dom';
 
 
 function SubirAsset () {
-    const { id } = useParams();
-
     // Cargar etiquetas para sugerencias
     const navigate = useNavigate();
     const [suggestions, setSuggestions] = useState([]);
@@ -32,32 +29,8 @@ function SubirAsset () {
     const [categs, setCategs] = useState([]);
     const { user } = useSelector((state) => state.auth);
     const [loading, setLoading] = useState(false);
-    const [asset, setAsset] = useState({});
-    const [filesFicticios, setFilesFicticios] = useState([]);
-    const [filesDelete, setFilesDelete] = useState([]);
     
-    // Si hay id, obtener asset
-    useEffect(() => {
-        if(id){
-            axios.get(`/api/assets/${id}`)
-                .then((response) => {
-                    setAsset(response.data);
-                    setFormValues({
-                        name: response.data.name || '',
-                        description: response.data.description || ''
-                    });
-                    setTags(response.data.tags);
-                    setFilesFicticios(response.data.downloadUrls);
-                    console.log('ficticios obtenidos ', response.data.downloadUrls)
-                    /*const fs = response.data.downloadUrls.map(obj => obj.filename);
-                    setFiles(fs);*/
-                    console.log(response.data);
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                });
-        }
-    }, [id]);
+    // console.log(formatsList);
     
     // Obtener extensiones por categorías
     useEffect(() => {
@@ -75,9 +48,9 @@ function SubirAsset () {
     useEffect(() => {
         axios.get('/api/tags')
         .then(response => {
-			const namesOnly = response.data.map(tag => tag.name);
+            const namesOnly = response.data.map(tag => tag.name);
             setSuggestions(namesOnly);
-			console.log('Suggestions:', namesOnly);
+            console.log('Suggestions:', namesOnly);
         })
         .catch(error => {
             console.error('Error:', error);
@@ -108,18 +81,6 @@ function SubirAsset () {
     };
     const remove = (id) => {
         setFiles(prevFiles => prevFiles.filter((_, index) => index !== id));
-    }
-
-    const removeFicticio = (url) => {
-        /*const arr = filesDelete.push(url);
-        setFilesDelete(arr);
-        setFilesFicticios(prevFiles => prevFiles.filter((_, url) => url !== url));
-        console.log('Fiticios',arr);*/
-        const newFiles = [...filesDelete, url];
-        setFilesDelete(newFiles);
-        setFilesFicticios(prevFiles => prevFiles.filter(file => file.url !== url));
-        console.log('Ficticios:', newFiles);
-        
     }
 
     const handleChange = (e, id, idError) => {
@@ -154,7 +115,7 @@ function SubirAsset () {
             document.querySelector('#description').classList.add('error');
             document.querySelector('#description-error').classList.remove('hidden');
         }
-        if (files.length===0 && !id){
+        if (files.length===0){
             error = true;
             // Mostrar error
             document.querySelector('.upload-button').classList.add('error');
@@ -207,59 +168,21 @@ function SubirAsset () {
         }
 
         // Es hora de subirlo!
-        if(id){
-            try {
-                const response1 = await axios.put(`/api/assets/${id}`, formData, {
+        try {
+            const response = await axios.post('api/assets/', formData, {
                 // headers: {
                 //     'Content-Type': 'multipart/form-data',
                 // },
-                });
-                
-                console.log('Respusta 1:', response1.data);
-                if(filesDelete.length>0){
-                    const response2 = await axios.post(`/api/assets/${id}/files-delete`, {files: filesDelete});
-                    console.log('Respusta 2:', response2.data);
-                }
-
-                // Subir etiquetas
-                if(tags.length>0){
-                    const response3 = await axios.post(`/api/tags/`, {tags: tags});
-                }
-                
-
-                navigate('/perfil');
-            } catch (error) {
-                console.error('Error:', error);
-            }
-            finally{
-                // Desactivar loading
-                setLoading(false);
-            }
+            });
+            console.log('Respusta:', response.data);
+            navigate('/perfil');
+        } catch (error) {
+            console.error('Error:', error);
         }
-        else{
-            try {
-                const response = await axios.post('api/assets/', formData, {
-                    // headers: {
-                    //     'Content-Type': 'multipart/form-data',
-                    // },
-                });
-
-                // Subir etiquetas
-                if(tags.length>0){
-                    const response3 = await axios.post(`/api/tags/`, {tags: tags});
-                }
-
-                console.log('Respusta:', response.data);
-                navigate('/perfil');
-            } catch (error) {
-                console.error('Error:', error);
-            }
-            finally{
-                // Desactivar loading
-                setLoading(false);
-            }
+        finally{
+            // Desactivar loading
+            setLoading(false);
         }
-        
     }
 
     return(
@@ -271,23 +194,16 @@ function SubirAsset () {
                     <h2>Subir asset</h2>
                     <p>Los campos marcados con * son obligatorios.</p>
                     <form action="" onSubmit={subirAsset}>
-                        <Input inputName="name" labelText="Nombre *" inputTipo="text" inputChange={(e) => handleChange(e, "#name", "#name-error")} inputValue={formValues.name}></Input>
+                        <Input inputName="name" labelText="Nombre *" inputTipo="text" inputChange={(e) => handleChange(e, "#name", "#name-error")}></Input>
                         <ErrorMessage message='Campo "Nombre" es obligatorio' messageId='name-error'></ErrorMessage>
-                        <Input inputName="description" labelText="Descripción *" inputTipo="textarea" inputChange={(e) => handleChange(e, "#description", "#description-error")} inputValue={formValues.description}></Input>
+                        <Input inputName="description" labelText="Descripción *" inputTipo="textarea" inputChange={(e) => handleChange(e, "#description", "#description-error")}></Input>
                         <ErrorMessage message='Campo "Descripción" es obligatorio' messageId='description-error'></ErrorMessage>
                         {/* <Input inputName="tags" labelText="Etiquetas" inputTipo="text"></Input> */}
-                        <SuggestionsInput suggestions={suggestions} existingValues={tags} labelText="Etiquetas" inputName="tags" ariaLabel='Añadir etiqueta' returnValues={setTagsValues}></SuggestionsInput>
+                        <SuggestionsInput suggestions={suggestions} labelText="Etiquetas" inputName="tags" ariaLabel='Añadir etiqueta' returnValues={setTagsValues}></SuggestionsInput>
                         <UploadButton uploadFunction={handleFilesSelected}></UploadButton>
                         <ErrorMessage message='Campo "Ficheros" es obligatorio' messageId='files-error'></ErrorMessage>
                         {/* <section>
                             <h3>Ficheros cargados</h3> */}
-                            {filesFicticios && filesFicticios.length ? (
-                                <ul className="files">
-                                    {filesFicticios.map((file, idx) => (
-                                        <li key={file.filename + idx}><FileUpload fileName={file.filename} fileType={file.format} remove={() => removeFicticio(file.url)} categories={formatsList}></FileUpload></li>
-                                    ))}
-                                </ul>
-                            ) : (null)}
                             <ul className="files">
                                 {files.map((file, idx) => (
                                     <li key={file.name + idx}><FileUpload fileName={file.name} fileType={file.type} remove={() => remove(idx)} categories={formatsList}></FileUpload></li>

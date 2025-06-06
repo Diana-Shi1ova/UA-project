@@ -5,7 +5,6 @@ import "./Like.css";
 import { like, unlike, resetLikesState } from '../../features/likes/likesSlice'
 
 function Like({likesNum=0, asset}){
-    console.log(asset);
     const dispatch = useDispatch();
     const user = useSelector((state) => state.auth.user);
     const { likedAssetIds} = useSelector((state) => state.likes);
@@ -24,14 +23,14 @@ function Like({likesNum=0, asset}){
 
             if (likeObj) {
                 dispatch(unlike(likeObj._id));
-                setNum(likesNum-1);
+                setNum(prev => Math.max(prev - 1, 0));
             }
             console.log('unlike');
         }
         else{
             // Like
             dispatch(like({userId: user._id, assetId: asset}));
-            setNum(likesNum);
+            setNum(prev => prev + 1);
             console.log('like');
         }
     }

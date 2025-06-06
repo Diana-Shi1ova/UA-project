@@ -43,6 +43,7 @@ function App() {
             <Route path='/mis-datos/cambio-contrasenya' element={<CambioContrasenya/>}/>
             <Route path='/mis-datos/eliminar-cuenta' element={<EliminarCuenta/>}/>
             <Route path='/subir-asset' element={<SubirAsset/>}/>
+            <Route path='/modificar-asset/:id' element={<SubirAsset/>}/>
             <Route path='/historial' element={<Historial/>}/>
             <Route path='/favoritos' element={<Favoritos/>}/>
           </Routes>
