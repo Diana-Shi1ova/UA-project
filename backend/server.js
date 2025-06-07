@@ -9,6 +9,11 @@ connectDB();
 
 const app = express();
 
+app.use(cors({
+  origin: ['https://ua-project.vercel.app', 'http://localhost:5173'],
+  credentials: true
+}));
+
 app.use(express.json());
 app.use(express.urlencoded({extended: false})); // comprobar!
 
@@ -21,10 +26,7 @@ app.use('/api/histories', require('./routes/historyRoutes'));
 app.use('/api/tags', require('./routes/tagRoutes'));
 app.use('/api/users', require('./routes/userRoutes'));
 
-app.use(cors({
-  origin: ['https://ua-project.vercel.app', 'http://localhost:5173'],
-  credentials: true
-}));
+
 
 //app.use(errorHandler);
 
