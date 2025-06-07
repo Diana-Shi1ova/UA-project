@@ -5,7 +5,7 @@ import "./Tag.css";
 function Tag({tagName}){
     return(
         <div className="tag">
-            <Link to="/buscar?tag=Tag1"><FaTag /> {tagName}</Link>
+            <Link to={"/buscar?q="+tagName}><FaTag /> {tagName}</Link>
         </div>
     );
 }

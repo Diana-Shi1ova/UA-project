@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import Button from "../Button/Button";
 import axios from 'axios';
 
-function Comment ({commentData, deleteCom=()=>{}}) {
+function Comment ({commentData, deleteCom=()=>{}, autor}) {
     const [user, setUser] = useState('');
     const userId = useSelector((state) => state.auth.user._id);
 
@@ -23,6 +23,11 @@ function Comment ({commentData, deleteCom=()=>{}}) {
 
         const deleteComment = (e) => {
             e.preventDefault();
+            const confirmed = window.confirm('¿Desea eliminar este comentario?');
+
+            if (!confirmed) {
+                return;
+            }
 
             axios.delete(`/api/comments/${commentData._id}`)
                 .then(response => {
@@ -42,7 +47,7 @@ function Comment ({commentData, deleteCom=()=>{}}) {
                 <p className="user">{user}</p>
                 <FormattedDate dateISO={commentData.createdAt}></FormattedDate>
                 <p className="content">{commentData.content}</p>
-                {userId ? (
+                {userId && userId==autor ? (
                     <Button ariaLabel="Eliminar comentario" icon="FaRegTrashAlt" buttonColor="danger" buttonFunction={deleteComment}></Button>
                 ) : null}
             </div>

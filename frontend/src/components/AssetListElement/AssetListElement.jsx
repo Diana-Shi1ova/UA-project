@@ -23,7 +23,7 @@ function AssetListElement ({asset, modify=false, deleteAsset=()=>{}}) {
         if (confirmed) {
             // deleteAsset(asset._id);
             // Ficheros
-            axios.delete(`/api/assets/${asset._id}/files-delete`, {files: []})
+            axios.post(`/api/assets/${asset._id}/files-delete`, {files: []})
                 .then(response => {
                     console.log('Deleted:', response.data);
                 })
@@ -108,7 +108,7 @@ function AssetListElement ({asset, modify=false, deleteAsset=()=>{}}) {
 
 
     return (
-        <article className="asset-list-element">
+        <div className="asset-list-element">
             <Link to={"/asset/"+asset._id}>
                 <img src={src} alt={"Vista previa "+asset.name} />
             </Link>
@@ -128,7 +128,7 @@ function AssetListElement ({asset, modify=false, deleteAsset=()=>{}}) {
             ) : (
                 <Like likesNum={asset.likes} asset={asset._id}></Like>
             )}
-        </article>
+        </div>
     );
 }
 

@@ -71,7 +71,7 @@ function UploadButton ({uploadFunction}) {
     return (
         <>
             <label htmlFor="fileInput">Ficheros *</label>
-            <input type="file" id='fileInput' className="input-hidden" ref={fileInputRef} onChange={inputChange} accept='*/*' multiple/>
+            <input type="file" id='fileInput' className="input-hidden" ref={fileInputRef} onChange={inputChange} multiple/>
             <button
                 className="upload-button"
                 onClick={activarInput}

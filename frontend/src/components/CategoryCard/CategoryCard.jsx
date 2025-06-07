@@ -3,12 +3,12 @@ import "./CategoryCard.css";
 
 function CategoryCard({cardLink, cardImage, cardAlt="", cardLabel=""}){
     return(
-        <article className="category-card">
+        <div className="category-card">
             <Link to={cardLink}>
-                <img src={cardImage} alt="" className="category-img"/>
+                <img src={cardImage} alt={cardAlt} className="category-img"/>
                 <p>{cardLabel}</p>
             </Link>
-        </article>
+        </div>
     );
 }
 

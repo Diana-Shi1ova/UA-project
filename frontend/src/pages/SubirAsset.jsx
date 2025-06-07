@@ -270,7 +270,7 @@ function SubirAsset () {
                 <section className="section-form">
                     <h2>{id ? "Modificar asset" : "Subir asset"}</h2>
                     <p>Los campos marcados con * son obligatorios.</p>
-                    <form action="" onSubmit={subirAsset}>
+                    <form onSubmit={subirAsset}>
                         <Input inputName="name" labelText="Nombre *" inputTipo="text" inputChange={(e) => handleChange(e, "#name", "#name-error")} inputValue={formValues.name}></Input>
                         <ErrorMessage message='Campo "Nombre" es obligatorio' messageId='name-error'></ErrorMessage>
                         <Input inputName="description" labelText="Descripción *" inputTipo="textarea" inputChange={(e) => handleChange(e, "#description", "#description-error")} inputValue={formValues.description}></Input>

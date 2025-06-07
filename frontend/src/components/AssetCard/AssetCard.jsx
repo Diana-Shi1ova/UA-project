@@ -33,45 +33,45 @@ function AssetCard({asset, categoria}){
         const first = asset.downloadUrls.find(file => file.category === '2D');
         if(first){
             return(
-                <article className="asset-card">
+                <div className="asset-card">
                     <Link to={user && user._id ? ("/asset/"+asset._id) : ("/login")}>
                         <img src={first.url} alt={"Vista previa "+ asset.name} className="asset-image"/>
                         <p>{asset.name}</p>
                     </Link>
                     {categories.map((item, index) => (
-                        <Link key={index} to={`/buscar?category=${item.category}`}><CategoryElement categoryName={item.category} iconOnly={true}></CategoryElement> {item.count}</Link>
+                        <Link key={index} to={`/buscar?q=${item.category}`}><CategoryElement categoryName={item.category} iconOnly={true}></CategoryElement> {item.count}</Link>
                     ))}
-                    {user && user._id ? (<Like likesNum={asset.likes} asset></Like>) : (null)}
-                </article>
+                    {user && user._id ? (<Like likesNum={asset.likes} asset={asset}></Like>) : (null)}
+                </div>
             );
         }
     }
     if(categoria==="3D"){
         return(
-            <article className="asset-card">
+            <div className="asset-card">
                 <Link to={user && user._id ? ("/asset/"+asset._id) : ("/login")}>
                     <img src={asset.preview ? (asset.preview) : (preview)} alt={"Vista previa "+ asset.name} className="asset-image"/>
                     <p>{asset.name}</p>
                 </Link>
                     {categories.map((item, index) => (
-                        <Link key={index} to={`/buscar?category=${item.category}`}><CategoryElement categoryName={item.category} iconOnly={true}></CategoryElement> {item.count}</Link>
+                        <Link key={index} to={`/buscar?q=${item.category}`}><CategoryElement categoryName={item.category} iconOnly={true}></CategoryElement> {item.count}</Link>
                     ))}
-                    {user && user._id ? (<Like likesNum={asset.likes} asset></Like>) : (null)}
-            </article>
+                    {user && user._id ? (<Like likesNum={asset.likes} asset={asset}></Like>) : (null)}
+            </div>
         ); 
     }
     else if(categoria === "Vídeo"){
         const first = asset.downloadUrls.find(file => file.category === 'Vídeo');
         if(first){
             return(
-                <article className="asset-card">
+                <div className="asset-card">
                         <Video videoSrc={first.url}></Video>
                         <Link to={user && user._id ? ("/asset/"+asset._id) : ("/login")}><p>{asset.name}</p></Link>
                         {categories.map((item, index) => (
-                            <Link key={index} to={`/buscar?category=${item.category}`}><CategoryElement categoryName={item.category} iconOnly={true}></CategoryElement> {item.count}</Link>
+                            <Link key={index} to={`/buscar?q=${item.category}`}><CategoryElement categoryName={item.category} iconOnly={true}></CategoryElement> {item.count}</Link>
                         ))}
-                        {user && user._id ? (<Like likesNum={asset.likes} asset></Like>) : (null)}
-                </article>
+                        {user && user._id ? (<Like likesNum={asset.likes}asset={asset}></Like>) : (null)}
+                </div>
             );
         }
     }
@@ -80,46 +80,46 @@ function AssetCard({asset, categoria}){
         console.log(first);
         if(first){
             return(
-                <article className="asset-card-list">
+                <div className="asset-card-list">
                         <Audio audioSrc={first.url}></Audio>
                         <Link to={user && user._id ? ("/asset/"+asset._id) : ("/login")}><p>{asset.name}</p></Link>
                         {categories.map((item, index) => (
-                            <Link key={index} to={`/buscar?category=${item.category}`}><CategoryElement categoryName={item.category} iconOnly={true}></CategoryElement> {item.count}</Link>
+                            <Link key={index} to={`/buscar?q=${item.category}`}><CategoryElement categoryName={item.category} iconOnly={true}></CategoryElement> {item.count}</Link>
                         ))}
-                        {user && user._id ? (<Like likesNum={asset.likes} asset></Like>) : (null)}
-                </article>
+                        {user && user._id ? (<Like likesNum={asset.likes} asset={asset}></Like>) : (null)}
+                </div>
             );
         }
     }
     else if(categoria==="Código"){
         return(
-            <article className="asset-card-list">
+            <div className="asset-card-list">
                 <Link to={user && user._id ? ("/asset/"+asset._id) : ("/login")}>
                     <p className="title">{asset.name}</p>
                     {/* <p>{asset.description}</p> */}
                 </Link>
                     {categories.map((item, index) => (
-                        <Link key={index} to={`/buscar?category=${item.category}`}><CategoryElement categoryName={item.category} iconOnly={true}></CategoryElement> {item.count}</Link>
+                        <Link key={index} to={`/buscar?q=${item.category}`}><CategoryElement categoryName={item.category} iconOnly={true}></CategoryElement> {item.count}</Link>
                     ))}
                     <p className="description">{asset.description}</p>
-                    {user && user._id ? (<Like likesNum={asset.likes} asset></Like>) : (null)}
+                    {user && user._id ? (<Like likesNum={asset.likes} asset={asset}></Like>) : (null)}
                 
-            </article>
+            </div>
         );
     }
     else if(categoria==="Otros"){
         return(
-            <article className="asset-card-list">
+            <div className="asset-card-list">
                 <Link to={user && user._id ? ("/asset/"+asset._id) : ("/login")}>
                     <p className="title">{asset.name}</p>
                     {/* <p>{asset.description}</p> */}
                 </Link>
                     {categories.map((item, index) => (
-                        <Link key={index} to={`/buscar?category=${item.category}`}><CategoryElement categoryName={item.category} iconOnly={true}></CategoryElement> {item.count}</Link>
+                        <Link key={index} to={`/buscar?q=${item.category}`}><CategoryElement categoryName={item.category} iconOnly={true}></CategoryElement> {item.count}</Link>
                     ))}
                     <p className="description">{asset.description}</p>
-                    {user && user._id? (<Like likesNum={asset.likes} asset></Like>) : (null)}
-            </article>
+                    {user && user._id? (<Like likesNum={asset.likes} asset={asset}></Like>) : (null)}
+            </div>
         );
     }
     }

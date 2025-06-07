@@ -183,7 +183,7 @@ function Asset(){
                         <ul>
                             {comments ? (
                                 comments.map((item, index) => (
-                                    <li key={index}><Comment commentData={item} deleteCom={deleteCom}></Comment></li>
+                                    <li key={index}><Comment commentData={item} deleteCom={deleteCom} autor={item.author}></Comment></li>
                                 ))
                             ) : null}
                         </ul>
