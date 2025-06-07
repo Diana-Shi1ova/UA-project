@@ -39,7 +39,7 @@ function SubirAsset () {
     // Si hay id, obtener asset
     useEffect(() => {
         if(id){
-            axios.get(`/api/assets/${id}`)
+            axios.get(`${import.meta.env.VITE_API_URL}/api/assets/${id}`)
                 .then((response) => {
                     setAsset(response.data);
                     setFormValues({
@@ -61,7 +61,7 @@ function SubirAsset () {
     
     // Obtener extensiones por categorías
     useEffect(() => {
-        axios.get('/api/formats/by-category')
+        axios.get(`${import.meta.env.VITE_API_URL}/api/formats/by-category`)
             .then((response) => {
                 setFormatsList(response.data);
                 console.log(response.data);
@@ -73,7 +73,7 @@ function SubirAsset () {
 
     // Obtener etiquetas
     useEffect(() => {
-        axios.get('/api/tags')
+        axios.get(`${import.meta.env.VITE_API_URL}/api/tags`)
         .then(response => {
 			const namesOnly = response.data.map(tag => tag.name);
             setSuggestions(namesOnly);
@@ -209,7 +209,7 @@ function SubirAsset () {
         // Es hora de subirlo!
         if(id){
             try {
-                const response1 = await axios.put(`/api/assets/${id}`, formData, {
+                const response1 = await axios.put(`${import.meta.env.VITE_API_URL}/api/assets/${id}`, formData, {
                 // headers: {
                 //     'Content-Type': 'multipart/form-data',
                 // },
@@ -217,13 +217,13 @@ function SubirAsset () {
                 
                 console.log('Respusta 1:', response1.data);
                 if(filesDelete.length>0){
-                    const response2 = await axios.post(`/api/assets/${id}/files-delete`, {files: filesDelete});
+                    const response2 = await axios.post(`${import.meta.env.VITE_API_URL}/api/assets/${id}/files-delete`, {files: filesDelete});
                     console.log('Respusta 2:', response2.data);
                 }
 
                 // Subir etiquetas
                 if(tags.length>0){
-                    const response3 = await axios.post(`/api/tags/`, {tags: tags});
+                    const response3 = await axios.post(`${import.meta.env.VITE_API_URL}/api/tags/`, {tags: tags});
                 }
                 
 
@@ -238,7 +238,7 @@ function SubirAsset () {
         }
         else{
             try {
-                const response = await axios.post('api/assets/', formData, {
+                const response = await axios.post(`${import.meta.env.VITE_API_URL}api/assets/`, formData, {
                     // headers: {
                     //     'Content-Type': 'multipart/form-data',
                     // },
@@ -246,7 +246,7 @@ function SubirAsset () {
 
                 // Subir etiquetas
                 if(tags.length>0){
-                    const response3 = await axios.post(`/api/tags/`, {tags: tags});
+                    const response3 = await axios.post(`${import.meta.env.VITE_API_URL}/api/tags/`, {tags: tags});
                 }
 
                 console.log('Respusta:', response.data);

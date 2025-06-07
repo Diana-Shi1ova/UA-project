@@ -18,7 +18,7 @@ function Historial(){
 
     useEffect(() => {
         axios.get(
-            '/api/histories/assets',
+            `${import.meta.env.VITE_API_URL}/api/histories/assets`,
             { params: { user: user._id } }
         )
         .then(response => {

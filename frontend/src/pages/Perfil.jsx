@@ -22,7 +22,7 @@ function Perfil(){
 
     //Obteber assets del usuario
      useEffect(() => {
-            axios.get(`/api/assets/user/${user._id}`)
+            axios.get(`${import.meta.env.VITE_API_URL}/api/assets/user/${user._id}`)
                 .then(response => {
                     console.log('assets:', response.data);
                     setAssets(response.data);

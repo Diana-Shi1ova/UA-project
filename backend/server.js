@@ -22,7 +22,7 @@ app.use('/api/tags', require('./routes/tagRoutes'));
 app.use('/api/users', require('./routes/userRoutes'));
 
 app.use(cors({
-  origin: 'https://ua-project.vercel.app/',
+  origin: ['https://ua-project.vercel.app', 'http://localhost:5173'],
   credentials: true
 }));
 

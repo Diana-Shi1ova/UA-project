@@ -38,7 +38,7 @@ function Busqueda(){
 
         console.log(params);
 
-        axios.get('/api/assets/search/', { params })
+        axios.get(`${import.meta.env.VITE_API_URL}/api/assets/search/`, { params })
             .then(response => {
                 setResult(response.data);
                 console.log(response.data);
@@ -62,7 +62,7 @@ function Busqueda(){
         if (tags?.length) params.tags = tags.join(',');
         if (formats?.length) params.formats = formats.join(',');
 
-        axios.get('/api/assets/search/', {
+        axios.get(`${import.meta.env.VITE_API_URL}/api/assets/search/`, {
             params
         })
             .then(response => {

@@ -72,7 +72,7 @@ function MisDatos(){
                 },
             });*/
 
-            const response = await axios.delete(`/api/users/${user._id}/avatar`, {
+            const response = await axios.delete(`${import.meta.env.VITE_API_URL}/api/users/${user._id}/avatar`, {
                 // data: avatarActual,
                 headers: {
                     'Content-Type': 'multipart/form-data',
@@ -105,7 +105,7 @@ function MisDatos(){
         formData.append('avatar', file);
 
         try {
-            const response = await axios.post(`/api/users/${user._id}/avatar`, formData, {
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/users/${user._id}/avatar`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     Authorization: `Bearer ${token}`,

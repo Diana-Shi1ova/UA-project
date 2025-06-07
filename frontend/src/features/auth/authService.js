@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_URL = '/api/users/'
+const API_URL = `${import.meta.env.VITE_API_URL}/api/users/`
 
 // Register user
 const register = async (userData) => {
@@ -40,7 +40,7 @@ const updateUser = async (userData) => {
     },
   }
 
-  const response = await axios.put(`/api/users/${user._id}`, userData, config)
+  const response = await axios.put(`${import.meta.env.VITE_API_URL}/api/users/${user._id}`, userData, config)
   const updatedUser = {
     ...user,
     ...response.data,

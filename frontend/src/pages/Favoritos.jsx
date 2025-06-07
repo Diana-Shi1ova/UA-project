@@ -21,7 +21,7 @@ function Favoritos(){
         const idsArray = likedAssetIds.map(obj => obj.asset);;
 
         axios.post(
-            '/api/assets/by-ids',
+            `${import.meta.env.VITE_API_URL}/api/assets/by-ids`,
             { ids: idsArray }
         )
         .then(response => {

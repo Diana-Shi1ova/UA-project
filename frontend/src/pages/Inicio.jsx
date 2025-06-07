@@ -27,7 +27,7 @@ function Inicio(){
     const [assets_otros, setAssets_otros] = useState();
 
     useEffect(() => {
-        axios.get('/api/assets/search/', {
+        axios.get(`${import.meta.env.VITE_API_URL}/api/assets/search/`, {
             params: {
                 categories: '2D',
                 page: 1,
@@ -42,7 +42,7 @@ function Inicio(){
                 console.error('Error:', error);
             });
 
-        axios.get('/api/assets/search/', {
+        axios.get(`${import.meta.env.VITE_API_URL}/api/assets/search/`, {
             params: {
                 categories: '3D',
                 page: 1,
@@ -57,7 +57,7 @@ function Inicio(){
                 console.error('Error:', error);
             });
 
-        axios.get('/api/assets/search/', {
+        axios.get(`${import.meta.env.VITE_API_URL}/api/assets/search/`, {
             params: {
                 categories: 'Audio',
                 page: 1,
@@ -72,7 +72,7 @@ function Inicio(){
                 console.error('Error:', error);
             });
 
-        axios.get('/api/assets/search/', {
+        axios.get(`${import.meta.env.VITE_API_URL}/api/assets/search/`, {
             params: {
                 categories: 'Vídeo',
                 page: 1,
@@ -87,7 +87,7 @@ function Inicio(){
                 console.error('Error:', error);
             });
 
-        axios.get('/api/assets/search/', {
+        axios.get(`${import.meta.env.VITE_API_URL}/api/assets/search/`, {
             params: {
                 categories: 'Código',
                 page: 1,
@@ -102,7 +102,7 @@ function Inicio(){
                 console.error('Error:', error);
             });
 
-        axios.get('/api/assets/search/', {
+        axios.get(`${import.meta.env.VITE_API_URL}/api/assets/search/`, {
             params: {
                 categories: 'Otros',
                 page: 1,

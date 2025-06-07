@@ -36,7 +36,7 @@ function Download ({downloadButton=false, userId, assetId, downloadList = [], do
 
     const download = () => {
         axios.post(
-            `/api/assets/download/${userId}/${assetId}`,
+            `${import.meta.env.VITE_API_URL}/api/assets/download/${userId}/${assetId}`,
             { filenames: downloadList },
             { responseType: 'arraybuffer' }
         )

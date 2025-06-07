@@ -26,7 +26,7 @@ function Filters ({category, authorSuggestions=[], buscar=()=>{}}) {
     useEffect(() => {
         console.log('useEffect')
         axios.get(
-            '/api/tags/'
+            `${import.meta.env.VITE_API_URL}/api/tags/`
         )
         .then(response => {
             console.log(response.data);
@@ -43,7 +43,7 @@ function Filters ({category, authorSuggestions=[], buscar=()=>{}}) {
         console.log('Formatos por: ',category);
         if(!category) return;
 
-        axios.get(`/api/formats/by-category?category=${category}`)
+        axios.get(`${import.meta.env.VITE_API_URL}/api/formats/by-category?category=${category}`)
             .then(response => {
                 const f = response.data[0].formats;
                 f.push("Otro");

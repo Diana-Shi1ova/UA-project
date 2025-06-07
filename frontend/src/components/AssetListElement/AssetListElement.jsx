@@ -23,7 +23,7 @@ function AssetListElement ({asset, modify=false, deleteAsset=()=>{}}) {
         if (confirmed) {
             // deleteAsset(asset._id);
             // Ficheros
-            axios.post(`/api/assets/${asset._id}/files-delete`, {files: []})
+            axios.post(`${import.meta.env.VITE_API_URL}/api/assets/${asset._id}/files-delete`, {files: []})
                 .then(response => {
                     console.log('Deleted:', response.data);
                 })
@@ -32,7 +32,7 @@ function AssetListElement ({asset, modify=false, deleteAsset=()=>{}}) {
                 });
             
             //Asset
-            axios.delete(`/api/assets/${asset._id}`)
+            axios.delete(`${import.meta.env.VITE_API_URL}/api/assets/${asset._id}`)
                 .then(response => {
                     console.log('Deleted:', response.data);
                     deleteAsset(asset._id);

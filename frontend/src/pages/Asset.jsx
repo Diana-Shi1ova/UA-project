@@ -44,7 +44,7 @@ function Asset(){
     }, [id]);*/
 
     useEffect(() => {
-        axios.get(`/api/assets/${id}`)
+        axios.get(`${import.meta.env.VITE_API_URL}/api/assets/${id}`)
             .then(response => {
                 console.log('Asset:', response.data);
                 setAsset(response.data);
@@ -56,7 +56,7 @@ function Asset(){
 
     useEffect(() => {
         if(asset){
-            axios.get(`/api/users/${asset.author}`)
+            axios.get(`${import.meta.env.VITE_API_URL}/api/users/${asset.author}`)
                 .then(response => {
                     console.log('User:', response.data);
                     setUser(response.data);
@@ -68,7 +68,7 @@ function Asset(){
     }, [asset]);
 
     useEffect(() => {
-        axios.get(`/api/comments/by-asset/${id}`)
+        axios.get(`${import.meta.env.VITE_API_URL}/api/comments/by-asset/${id}`)
             .then(response => {
                 console.log('Comments:', response.data);
                 setComments(response.data);
@@ -79,7 +79,7 @@ function Asset(){
     }, []);
 
     useEffect(() => {
-        axios.post('/api/histories', 
+        axios.post(`${import.meta.env.VITE_API_URL}/api/histories`, 
             {
                 user: userId,
                 asset: id

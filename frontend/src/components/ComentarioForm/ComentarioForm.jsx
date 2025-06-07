@@ -13,7 +13,7 @@ function ComentarioForm({returnComment=()=>{}, asset}){
     const createComment = (e) => {
         e.preventDefault();
 
-        axios.post(`/api/comments/`, {content: comment, asset: asset, author: user._id})
+        axios.post(`${import.meta.env.VITE_API_URL}/api/comments/`, {content: comment, asset: asset, author: user._id})
             .then(response => {
                 console.log('Comment:', response.data);
                 returnComment(response.data);

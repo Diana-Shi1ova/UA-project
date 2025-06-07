@@ -25,7 +25,7 @@ function EliminarCuenta(){
 
          try {
             // Borrar foto
-            const avatarDelete = axios.delete(`/api/users/${user._id}/avatar`, {
+            const avatarDelete = axios.delete(`${import.meta.env.VITE_API_URL}/api/users/${user._id}/avatar`, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     Authorization: `Bearer ${user.token}`,
@@ -33,10 +33,10 @@ function EliminarCuenta(){
             });
 
             // Borrar historial
-            const historyDelete = axios.delete(`/api/histories/delete-by-user/${user._id}`);
+            const historyDelete = axios.delete(`${import.meta.env.VITE_API_URL}/api/histories/delete-by-user/${user._id}`);
 
             // Modificar datos a anónimos
-            const anonymizeUser = axios.put(`/api/users/${user._id}`, {
+            const anonymizeUser = axios.put(`${import.meta.env.VITE_API_URL}/api/users/${user._id}`, {
                 name: 'Anónimo',
                 email: `deleted_${new Date().toISOString()}@example.com`,
                 phone: null,

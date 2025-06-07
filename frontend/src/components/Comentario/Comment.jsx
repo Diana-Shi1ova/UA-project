@@ -11,7 +11,7 @@ function Comment ({commentData, deleteCom=()=>{}, autor}) {
 
     if(commentData){
         useEffect(() => {
-            axios.get(`/api/users/${commentData.author}`)
+            axios.get(`${import.meta.env.VITE_API_URL}/api/users/${commentData.author}`)
                 .then(response => {
                     console.log('User:', response.data);
                     setUser(response.data.name);
@@ -29,7 +29,7 @@ function Comment ({commentData, deleteCom=()=>{}, autor}) {
                 return;
             }
 
-            axios.delete(`/api/comments/${commentData._id}`)
+            axios.delete(`${import.meta.env.VITE_API_URL}/api/comments/${commentData._id}`)
                 .then(response => {
                     console.log('Deleted:', response.data);
                     deleteCom(commentData._id);
