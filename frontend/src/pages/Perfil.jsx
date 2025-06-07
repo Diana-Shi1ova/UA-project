@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 
 import "./Perfil.css";
 import { useState, useEffect } from "react";
-import axios from "axios";
+import axios from 'axios';
 
 function Perfil(){ 
     const user = useSelector((state) => state.auth.user);

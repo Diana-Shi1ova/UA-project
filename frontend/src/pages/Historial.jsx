@@ -5,7 +5,7 @@ import AssetListElement from "../components/AssetListElement/AssetListElement";
 import "./Historial.css";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import axios from "axios";
+import axios from 'axios';
 
 function Historial(){
     const { user } = useSelector((state) => state.auth);
@@ -85,6 +85,7 @@ function Historial(){
                     <h2>Historial</h2>
                     <div className="horizontal">
                         <Filtrarassets filtrar={filtrar}></Filtrarassets>
+                            <div className="history-elements">
                             {filteredResult.groupedByDay && filteredResult.groupedByDay.length ? (
                                 filteredResult.groupedByDay.map((item, index) => (
                                     <section key={index}>
@@ -100,6 +101,7 @@ function Historial(){
                             ) : (
                                 <p className="no-encontrado">No se ha encontrado nada...</p>
                             )}
+                            </div>
                     </div>
                 </section>
             </main>

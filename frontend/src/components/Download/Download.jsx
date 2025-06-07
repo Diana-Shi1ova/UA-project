@@ -1,7 +1,7 @@
 import "./Download.css";
 import { FaDownload } from "react-icons/fa";
 import Button from "../Button/Button";
-import axios from "axios";
+import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
 function Download ({downloadButton=false, userId, assetId, downloadList = [], downloadDisabled=false}) {

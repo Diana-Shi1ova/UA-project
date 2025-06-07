@@ -5,7 +5,7 @@ import Button from "../components/Button/Button";
 import FileUpload from "../components/FileUpload/FileUpload";
 import SuggestionsInput from "../components/SuggestionsInput/SuggestionsInput";
 import { useEffect, useState } from 'react';
-import axios from "axios";
+import axios from 'axios';
 import UploadButton from "../components/UploadButton/UploadButton";
 import "./SubirAsset.css";
 import Download from "../components/Download/Download";
@@ -268,7 +268,7 @@ function SubirAsset () {
             <Header></Header>
             <main>
                 <section className="section-form">
-                    <h2>Subir asset</h2>
+                    <h2>{id ? "Modificar asset" : "Subir asset"}</h2>
                     <p>Los campos marcados con * son obligatorios.</p>
                     <form action="" onSubmit={subirAsset}>
                         <Input inputName="name" labelText="Nombre *" inputTipo="text" inputChange={(e) => handleChange(e, "#name", "#name-error")} inputValue={formValues.name}></Input>
@@ -297,7 +297,7 @@ function SubirAsset () {
                                 <li><FileUpload fileName="script.cpp"></FileUpload></li> */}
                             </ul>
                         {/* </section> */}
-                        <div className="form-botonera"><Button buttonName="Subir asset"></Button></div>
+                        <div className="form-botonera"><Button buttonName={id ? "Modificar asset" : "Subir asset"}></Button></div>
                     </form>
                 </section>
                 {/* <Download></Download> */}

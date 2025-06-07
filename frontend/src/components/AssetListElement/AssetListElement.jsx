@@ -7,7 +7,12 @@ import Button from "../Button/Button";
 import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
 import Dialog from "../Dialog/Dialog";
-import axios from "axios";
+import axios from 'axios';
+import img3D from '../../assets/cube-preview.avif';
+import imgA from '../../assets/note-preview.jpg';
+import imgV from '../../assets/video-preview.jpg';
+import imgC from '../../assets/code-preview.jpg';
+import imgO from '../../assets/ellipsis-preview.jpg';
 
 function AssetListElement ({asset, modify=false, deleteAsset=()=>{}}) {
     const navigate = useNavigate();
@@ -59,16 +64,53 @@ function AssetListElement ({asset, modify=false, deleteAsset=()=>{}}) {
     //const categories = [ { category: 'Audio', count: 3 }, { category: '2D', count: 2 }];
 
     // Ir a página de modificar
+
+
+    // Elegir preview
+    /*const src = '';
+
+    const download2D = asset.downloadUrls.find(d => d.category === '2D');
+    if (download2D) {
+        src = download2D.url;
+    } else {
+
+    }*/
     const modificar = () => {
         navigate('/modificar-asset/'+asset._id);
     }
 
+    // Elegir preview
+    var src = '';
+    
+    if(asset && asset.downloadUrls.length){
+        switch(asset.downloadUrls[0].category){
+            case '2D': 
+                src=asset.downloadUrls[0].url;
+                break;
+            case '3D':
+                src=img3D;
+                break;
+            case 'Audio':
+                src=imgA;
+                break;
+            case 'Vídeo':
+                src=imgV;
+                break;
+            case 'Código':
+                src=imgC;
+                break;
+            case 'Otros': src=imgO;
+        }
+    }
+
+
+    
 
 
     return (
         <article className="asset-list-element">
             <Link to={"/asset/"+asset._id}>
-                <img src={asset?.downloadUrls?.[0]?.url || ''} alt={"Vista previa "+asset.name} />
+                <img src={src} alt={"Vista previa "+asset.name} />
             </Link>
             <div className="nom-categ">
                 <Link to={"/asset/"+asset._id}>

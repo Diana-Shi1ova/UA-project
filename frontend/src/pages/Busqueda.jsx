@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Input from "../components/Input/Input";*/
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
-import axios from "axios";
+import axios from 'axios';
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useLocation } from 'react-router-dom';

@@ -95,12 +95,13 @@ function AssetCard({asset, categoria}){
         return(
             <article className="asset-card-list">
                 <Link to={user && user._id ? ("/asset/"+asset._id) : ("/login")}>
-                    <p>{asset.name}</p>
-                    <p>{asset.description}</p>
+                    <p className="title">{asset.name}</p>
+                    {/* <p>{asset.description}</p> */}
                 </Link>
                     {categories.map((item, index) => (
                         <Link key={index} to={`/buscar?category=${item.category}`}><CategoryElement categoryName={item.category} iconOnly={true}></CategoryElement> {item.count}</Link>
                     ))}
+                    <p className="description">{asset.description}</p>
                     {user && user._id ? (<Like likesNum={asset.likes} asset></Like>) : (null)}
                 
             </article>
@@ -110,12 +111,13 @@ function AssetCard({asset, categoria}){
         return(
             <article className="asset-card-list">
                 <Link to={user && user._id ? ("/asset/"+asset._id) : ("/login")}>
-                    <p>{asset.name}</p>
-                    <p>{asset.description}</p>
+                    <p className="title">{asset.name}</p>
+                    {/* <p>{asset.description}</p> */}
                 </Link>
                     {categories.map((item, index) => (
                         <Link key={index} to={`/buscar?category=${item.category}`}><CategoryElement categoryName={item.category} iconOnly={true}></CategoryElement> {item.count}</Link>
                     ))}
+                    <p className="description">{asset.description}</p>
                     {user && user._id? (<Like likesNum={asset.likes} asset></Like>) : (null)}
             </article>
         );

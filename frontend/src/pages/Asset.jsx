@@ -11,14 +11,16 @@ import "./Asset.css";
 import { FaFile } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import axios from "axios";
+import axios from 'axios';
 import FormattedDate from "../components/FormattedDate/FormattedDate";
 import FileSize from "../components/FileSize/FileSize";
 import Comment from "../components/Comentario/Comment";
 import CategoryElement from "../components/CategoryElement/CategoryElement";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function Asset(){
+    const navigate = useNavigate();
     const {id} = useParams();
     const userId = useSelector((state) => state.auth.user._id);
     const [asset, setAsset] = useState(null);
@@ -119,12 +121,17 @@ function Asset(){
         setComments(nuevoArray);
     }
 
+    const toModify = () => {
+        navigate('/modificar-asset/'+asset._id);
+    }
+
     return(
         <div className="content">
             <Header></Header>
             <main>
                 {asset ? (<h2>{asset.name}</h2>) : null}
                 <div className="asset-global">
+                    {asset && asset.author===userId ? (<Button buttonName="Modificar asset" buttonColor="warning" buttonFunction={toModify} icon="FaPencilAlt"></Button>) : null}
                     {asset ? (<Preview items={asset.downloadUrls} userId={user._id} assetId={id} likes={asset.likes}></Preview>) : null}
                     <section className="section-asset information">
                         <h3>Información</h3>

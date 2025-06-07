@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import FormattedDate from "../FormattedDate/FormattedDate";
 import { useSelector } from "react-redux";
 import Button from "../Button/Button";
-import axios from "axios";
+import axios from 'axios';
 
 function Comment ({commentData, deleteCom=()=>{}}) {
     const [user, setUser] = useState('');

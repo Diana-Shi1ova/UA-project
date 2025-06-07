@@ -1,5 +1,5 @@
 .asset-card{
-    background-color: rgb(45, 45, 45);
+    background-color: var(--fondo-2);
     padding: 1em;
     width: 200px;
 
@@ -13,5 +13,40 @@
     .asset-image{
         height: auto;
         width: 100%;
+    }
+
+    .like-div{
+        display: flex;
+        justify-content: center;
+    }
+}
+
+.asset-card-list{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    align-items: center;
+    background-color: var(--fondo-2);
+    padding: .5em;
+    margin-bottom: 1em;
+
+    max-width: 100%;
+    audio{
+        width: 100%;
+
+    }
+
+    .title{
+        font-weight: bold;
+    }
+
+    .description{
+        max-width: 300px;
+        color: var(--primary);
+    }
+
+    .like{
+        margin-left: auto;
     }
 }

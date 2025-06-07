@@ -1,6 +1,6 @@
 import Button from "../Button/Button";
 import "./Dialog.css";
-import axios from "axios";
+import axios from 'axios';
 
 
 

@@ -5,7 +5,7 @@ import AssetListElement from "../components/AssetListElement/AssetListElement";
 import "./Favoritos.css";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import axios from "axios";
+import axios from 'axios';
 // import Card from "../components/Card/Card";
 // import Perfilbuttons from "../components/Perfilbuttons/Perfilbuttons";
 // import Filtrarassets from "../components/Filtrarassets/Filtrarassets";

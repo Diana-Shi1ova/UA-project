@@ -2,7 +2,7 @@ import Input from "../Input/Input";
 import Button from "../Button/Button";
 import { useSelector} from 'react-redux';
 import { useState } from "react";
-import axios from "axios";
+import axios from 'axios';
 import "./ComentarioForm.css";
 
 function ComentarioForm({returnComment=()=>{}, asset}){

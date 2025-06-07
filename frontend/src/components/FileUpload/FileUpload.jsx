@@ -56,6 +56,7 @@ function FileUpload ({fileName, fileType, remove=(id) => {}, categories=[]}) {
         else if (type === 'audio') return 'Audio';
         else if (type === 'video') return 'Vídeo';
 
+        console.log('Deteerminar tipo', categories);
         for (const categoryObj of categories) {
             if (categoryObj.formats.includes(ext)) {
                 return categoryObj.categoryName;

@@ -1,6 +1,6 @@
 import Search from "../Search/Search";
 import Checkbox from "../Checkbox/Checkbox";
-import axios from "axios";
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 import CheckboxGroup from "../CheckboxGroup/CheckboxGroup";
 import './Filtrarassets.css';
@@ -97,11 +97,11 @@ function Filtrarassets({orientation="form-vertical", filtrar=()=>{}, dates=true}
                 {dates ? (
                 <section>
                     <h4>Rango de fechas</h4>
-                    <p>
+                    <p className="fecha">
                         <label htmlFor="inicio">Fecha inicio</label>
                         <input type="date" id="inicio" onChange={dateFromChange}/>
                     </p>
-                    <p>
+                    <p className="fecha">
                         <label htmlFor="fin">Fecha fin</label>
                         <input type="date"id="fin" onChange={dateToChange}/>
                     </p>

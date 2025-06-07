@@ -28,3 +28,18 @@
         }
     }
 }
+
+@media all and (width<900px){
+    .favoritos{
+        padding: 1em;
+    }
+}
+
+@media all and (width<650px){
+    .filtros-assets{
+        order: 1;
+    }
+    .favoritos-list{
+        order: 2 !important;
+    }
+}

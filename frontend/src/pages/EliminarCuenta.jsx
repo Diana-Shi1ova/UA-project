@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {logout, reset} from '../features/auth/authSlice';
 import "./EliminarCuenta.css";
 
-import axios from "axios";
+import axios from 'axios';
 
 function EliminarCuenta(){
     const navigate = useNavigate();

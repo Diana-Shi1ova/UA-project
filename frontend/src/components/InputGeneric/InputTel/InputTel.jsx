@@ -18,7 +18,7 @@ function InputTel({ labelText, inputName = "", inputChange=undefined}){
             itiRef.current = intlTelInput(inputRef.current, {
             initialCountry: "auto",
             geoIpLookup: (callback) => {
-                fetch("https://ipapi.co/json")
+                fetch("https://ipaxios.co/json")
                 .then((res) => res.json())
                 .then((data) => callback(data.country_code))
                 .catch(() => callback("us"));

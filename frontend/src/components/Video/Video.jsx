@@ -1,10 +1,11 @@
 import "./Video.css";
 
-function Video(videoSrc=''){
+function Video({videoSrc=''}){
+    console.log(videoSrc);
     return(
         // <video key={videoSrc} controls autoPlay muted loop>
-        <video key={videoSrc} controls autoPlay muted loop>
-            <source src="your-video-file.mp4" type="video/mp4" />
+        <video key={videoSrc} controls loop>
+            <source src={videoSrc} type="video/mp4" />
             Su navegador no soporta <code>video</code>.
         </video>
     );

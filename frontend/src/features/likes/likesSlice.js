@@ -23,7 +23,7 @@ export const fetchLikedAssets = createAsyncThunk(
             (error.response && error.response.data && error.response.data.message) ||
             error.message ||
             error.toString()
-        return thunkAPI.rejectWithValue(message)
+        return thunkaxios.rejectWithValue(message)
     }
   }
 )
@@ -39,7 +39,7 @@ export const like = createAsyncThunk(
         (error.response && error.response.data && error.response.data.message) ||
         error.message ||
         error.toString()
-      return thunkAPI.rejectWithValue(message)
+      return thunkaxios.rejectWithValue(message)
     }
   }
 )
@@ -55,7 +55,7 @@ export const unlike = createAsyncThunk(
             (error.response && error.response.data && error.response.data.message) ||
             error.message ||
             error.toString()
-        return thunkAPI.rejectWithValue(message)
+        return thunkaxios.rejectWithValue(message)
         }
     }
 )

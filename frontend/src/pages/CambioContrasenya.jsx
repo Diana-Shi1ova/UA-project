@@ -4,7 +4,7 @@ import Button from "../components/Button/Button";
 import Input from "../components/Input/Input";
 import { useNavigate } from "react-router-dom";
 
-import axios from "axios";
+import axios from 'axios';
 import { useSelector } from "react-redux";
 import { useState } from "react";
 

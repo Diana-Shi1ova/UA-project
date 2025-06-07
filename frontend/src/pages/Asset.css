@@ -6,6 +6,12 @@
     margin: 0 2em 2em 2em;
     gap: 1em;
 
+    .warning{
+        width: fit-content;
+        grid-column: 2;
+        justify-self: right;
+    }
+
     .section-asset{
         background-color: var(--fondo-2);
         padding: 2em;

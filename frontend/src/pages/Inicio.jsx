@@ -15,7 +15,7 @@ import img_video from '../assets/video.png';
 import img_codigo from '../assets/codigo.webp';
 import img_otros from '../assets/other.jpg';
 
-import axios from "axios";
+import axios from 'axios';
 import { useEffect, useState } from "react";
 
 function Inicio(){
@@ -125,12 +125,12 @@ function Inicio(){
                 <h2>Inicio</h2>
                 <h3>Categorías</h3>
                 <div className="cuadricula">
-                    <CategoryCard cardLink="/2D" cardImage={img_2d} cardAlt="2D" cardLabel="2D"></CategoryCard>
-                    <CategoryCard cardLink="/3D" cardImage={img_3d} cardAlt="3D" cardLabel="3D"></CategoryCard>
-                    <CategoryCard cardLink="/Audio" cardImage={img_audio} cardAlt="Audio" cardLabel="Audio"></CategoryCard>
-                    <CategoryCard cardLink="/Vídeo" cardImage={img_video} cardAlt="Vídeo" cardLabel="Vídeo"></CategoryCard>
-                    <CategoryCard cardLink="/Código" cardImage={img_codigo} cardAlt="Código" cardLabel="Código"></CategoryCard>
-                    <CategoryCard cardLink="/Otros" cardImage={img_otros} cardAlt="Otros" cardLabel="Otros"></CategoryCard>
+                    <CategoryCard cardLink="/buscar/2D" cardImage={img_2d} cardAlt="2D" cardLabel="2D"></CategoryCard>
+                    <CategoryCard cardLink="/buscar/3D" cardImage={img_3d} cardAlt="3D" cardLabel="3D"></CategoryCard>
+                    <CategoryCard cardLink="/buscar/Audio" cardImage={img_audio} cardAlt="Audio" cardLabel="Audio"></CategoryCard>
+                    <CategoryCard cardLink="/buscar/Vídeo" cardImage={img_video} cardAlt="Vídeo" cardLabel="Vídeo"></CategoryCard>
+                    <CategoryCard cardLink="/buscar/Código" cardImage={img_codigo} cardAlt="Código" cardLabel="Código"></CategoryCard>
+                    <CategoryCard cardLink="/buscar/Otros" cardImage={img_otros} cardAlt="Otros" cardLabel="Otros"></CategoryCard>
                 </div>
                 
                 <section className="section-inicio">

@@ -4,7 +4,7 @@ import Input from "../Input/Input";
 import SuggestionsInput from "../SuggestionsInput/SuggestionsInput";
 import Checkbox from "../Checkbox/Checkbox";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axios from 'axios';
 import CheckboxGroup from "../CheckboxGroup/CheckboxGroup";
 
 function Filters ({category, authorSuggestions=[], buscar=()=>{}}) {
